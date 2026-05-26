@@ -1,4 +1,4 @@
-# Antonis Landscaping — Website Deployment
+# Antoni's Landscaping — Website Deployment
 
 ## Files in this folder
 
@@ -25,7 +25,7 @@ If you'd rather I deploy it from here:
 
 **Form backend (Formspree, 2 min, free):**
 1. Sign up at **formspree.io** with `antonislandscaping@yahoo.com`
-2. Create a new form, name it "Antonis quote requests"
+2. Create a new form, name it "Antoni's quote requests"
 3. Copy the form ID (looks like `mzbqkxgr`)
 4. Open `index.html`, search for `YOUR_FORM_ID`, replace with the real ID
 5. Save & redeploy
