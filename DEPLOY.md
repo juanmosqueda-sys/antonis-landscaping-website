@@ -32,7 +32,7 @@ If you'd rather I deploy it from here:
 
 Without this step, the quote form will show "success" to visitors but won't actually deliver submissions.
 
-**Photos:** The portfolio grid and several backgrounds use Unsplash placeholders. Swap them for real Antonis before/after photos when you have them — search for `unsplash.com` in `index.html` to find every spot.
+**Photos:** All photos now reference real Antoni's job shots pulled from the existing `antonislandscaping.com` site (hosted on GoDaddy's `wsimg.com` CDN). **Caveat:** if the old GoDaddy site is ever shut down, these URLs will break. To future-proof, download each `DSC00XXX.jpg` into `assets/photos/` and update the URLs to relative paths. Affected files (search `wsimg.com` in `index.html`): hero, og:image, schema, 4 service cards, drought ribbon, final CTA, 6 portfolio tiles. Available photos: DSC00042, 00044, 00049, 00102, 00118, 00122, 00416, 00423, 00425.
 
 **Testimonials:** The three customer quotes are placeholders from the canonical website copy. Replace with real quotes once GBP reviews start rolling in. Search for `<!-- TODO: replace placeholder testimonials` in `index.html`.
 
