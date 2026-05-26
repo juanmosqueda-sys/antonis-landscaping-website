@@ -14,6 +14,62 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Schema.org LocalBusiness — helps Google's local search and rich snippets -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LandscapingBusiness",
+  "name": "Antonis Landscaping Inc.",
+  "image": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1600&q=80",
+  "@id": "https://antonislandscaping.com/",
+  "url": "https://antonislandscaping.com/",
+  "telephone": "+1-818-399-6318",
+  "email": "antonislandscaping@yahoo.com",
+  "priceRange": "$$",
+  "description": "Family-owned, fully insured Los Angeles landscaping company. Weekly maintenance, full landscape design and installation, drought-tolerant conversions with LADWP rebate assistance, and commercial grounds maintenance. Bilingual crews (English & Spanish). CSLB #768466.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "14801 Chatsworth Dr",
+    "addressLocality": "Mission Hills",
+    "addressRegion": "CA",
+    "postalCode": "91345",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 34.2727,
+    "longitude": -118.4664
+  },
+  "areaServed": [
+    { "@type": "City", "name": "Los Angeles" },
+    { "@type": "City", "name": "Mission Hills" },
+    { "@type": "City", "name": "Sherman Oaks" },
+    { "@type": "City", "name": "Encino" },
+    { "@type": "City", "name": "Studio City" },
+    { "@type": "City", "name": "Pasadena" },
+    { "@type": "City", "name": "Santa Monica" },
+    { "@type": "City", "name": "Burbank" },
+    { "@type": "City", "name": "Glendale" }
+  ],
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "opens": "06:00",
+      "closes": "15:30"
+    }
+  ],
+  "sameAs": [],
+  "knowsLanguage": ["en", "es"],
+  "hasCredential": {
+    "@type": "EducationalOccupationalCredential",
+    "credentialCategory": "license",
+    "name": "CSLB #768466",
+    "recognizedBy": { "@type": "Organization", "name": "California Contractors State License Board" }
+  }
+}
+</script>
 <style>
   :root {
     --green: #2d5016;
@@ -642,6 +698,98 @@
     display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
   }
 
+  /* ---------- Process / How It Works ---------- */
+  .process-grid {
+    display: grid; gap: 28px;
+    grid-template-columns: 1fr;
+    counter-reset: step;
+  }
+  @media (min-width: 720px) { .process-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; } }
+  @media (min-width: 1000px) { .process-grid { grid-template-columns: repeat(4, 1fr); gap: 32px; } }
+  .process-step {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    position: relative;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .process-step:hover { border-color: var(--sage); transform: translateY(-2px); }
+  .process-step h3 { margin-top: 12px; margin-bottom: 8px; }
+  .process-step p { color: var(--text-muted); font-size: 0.96rem; line-height: 1.6; }
+  .process-num {
+    font-family: var(--serif); font-size: 2.2rem; font-weight: 600;
+    color: var(--sage); letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  /* ---------- Drought / LADWP ribbon ---------- */
+  .drought-ribbon {
+    background:
+      linear-gradient(135deg, rgba(20,38,10,0.95) 0%, rgba(45,80,22,0.90) 100%),
+      url('https://images.unsplash.com/photo-1574482620811-1aa16ffe3c82?auto=format&fit=crop&w=2000&q=80') center/cover;
+    color: var(--cream);
+    padding: 100px 0;
+  }
+  .ribbon-inner { max-width: 760px; }
+  .ribbon-text .eyebrow.light { color: var(--tan); }
+  .ribbon-text h2 { color: var(--cream); margin-bottom: 22px; }
+  .ribbon-text h2 em { color: var(--tan); font-style: italic; font-weight: 400; }
+  .ribbon-text p {
+    color: rgba(247,245,239,0.88);
+    font-size: 1.08rem; line-height: 1.65;
+    margin-bottom: 32px;
+  }
+  .ribbon-text p em { color: var(--tan); font-style: italic; }
+
+  /* ---------- Work / Portfolio grid ---------- */
+  .work-grid {
+    display: grid; gap: 16px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 600px) { .work-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 900px) { .work-grid { grid-template-columns: repeat(3, 1fr); } }
+  .work-tile {
+    aspect-ratio: 4/3;
+    background-size: cover; background-position: center;
+    border-radius: var(--radius);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  .work-tile:hover { transform: scale(1.02); box-shadow: var(--shadow-lg); }
+
+  /* ---------- City tags (service area) ---------- */
+  .city-tags {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    max-width: 980px; margin: 24px auto 0;
+    justify-content: center;
+  }
+  .city-tags span {
+    background: var(--cream-warm);
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .city-tags span:hover { background: var(--green); color: var(--cream); border-color: var(--green); }
+
+  /* ---------- Tan button variant (for dark backgrounds) ---------- */
+  .btn-tan {
+    background: var(--tan);
+    color: var(--green-deep);
+    padding: 16px 28px;
+    border: none; border-radius: 100px;
+    font-family: var(--sans); font-weight: 600; font-size: 1rem;
+    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: background 0.15s ease, transform 0.15s ease;
+    text-decoration: none;
+  }
+  .btn-tan:hover { background: #e2d5b0; transform: translateY(-1px); }
+
   /* ---------- Sticky mobile CTA ---------- */
   .mobile-cta {
     position: fixed; bottom: 16px; left: 16px; right: 16px;
@@ -795,4 +943,351 @@
         <div class="service-img svc-design" role="img" aria-label="Custom landscape design with pavers"></div>
         <div class="service-body">
           <h3>Landscape Design &amp; Installation</h3>
-          <
+          <p>New yards, refreshed yards, and everything in between. We design, plant, build, and irrigate — all from one crew you already trust.</p>
+          <ul>
+            <li>Custom design &amp; planting</li>
+            <li>Patios, pavers, and retaining walls</li>
+            <li>Sod installation &amp; lawn renovation</li>
+            <li>Lighting &amp; outdoor living features</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-img svc-drought" role="img" aria-label="Drought-tolerant California native landscape"></div>
+        <div class="service-body">
+          <h3>Drought-Tolerant &amp; Turf Replacement</h3>
+          <p>Lower water bills, beautiful yards, and LADWP rebates we can help you claim. California-native plants and xeriscape design built for LA's climate.</p>
+          <ul>
+            <li>Native plant design</li>
+            <li>Turf-to-landscape conversions</li>
+            <li>LADWP rebate assistance</li>
+            <li>Smart irrigation upgrades</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-img svc-commercial" role="img" aria-label="Commercial property grounds maintenance"></div>
+        <div class="service-body">
+          <h3>Commercial Grounds Maintenance</h3>
+          <p>HOAs, property managers, and commercial owners: Antonis is the reliable, insured partner you've been looking for. Transparent pricing, responsive communication, bilingual crews on every site.</p>
+          <ul>
+            <li>HOA common-area maintenance</li>
+            <li>Multifamily &amp; apartment properties</li>
+            <li>Office parks and retail plazas</li>
+            <li>Seasonal &amp; storm-cleanup contracts</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2>Four simple steps. No surprises.</h2>
+      <p>The same process for every job — whether it's a weekly mow or a full front-yard redesign.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <h3>Free on-site estimate</h3>
+        <p>We come to your property, listen to what you want, and give you a clear, written quote. No pressure, no hidden fees.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <h3>Clear plan and schedule</h3>
+        <p>You get a timeline, a point of contact, and exact pricing in writing before anything starts.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <h3>Professional crew on site</h3>
+        <p>Our crew arrives in uniforms, in company trucks, with the tools to do it right the first time.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <h3>Walk-through and guarantee</h3>
+        <p>We walk the property with you when the job is done and stand behind our work. If something isn't right, we fix it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DROUGHT / LADWP RIBBON -->
+<section class="drought-ribbon">
+  <div class="container">
+    <div class="ribbon-inner">
+      <div class="ribbon-text">
+        <span class="eyebrow light">LADWP turf replacement program</span>
+        <h2>Replace your thirsty lawn. <em>Get paid to do it.</em></h2>
+        <p>The LADWP Turf Replacement Rebate pays Los Angeles homeowners per square foot of grass converted to California-friendly landscaping. We design the yard, handle the install, and walk you through the paperwork — so you get a beautiful, low-water yard <em>and</em> a check in the mail.</p>
+        <a href="#quote" class="btn btn-tan btn-arrow">Check my rebate eligibility</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK / PORTFOLIO -->
+<section id="work" class="alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Our work</span>
+      <h2>Recent projects across LA County.</h2>
+      <p>Maintenance routes, full installs, drought conversions, and commercial grounds — a sampling of what we do every week.</p>
+    </div>
+    <div class="work-grid">
+      <div class="work-tile" style="background-image: url('https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=900&q=80');" role="img" aria-label="Before/after lawn maintenance"></div>
+      <div class="work-tile" style="background-image: url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=900&q=80');" role="img" aria-label="Drought-tolerant front yard"></div>
+      <div class="work-tile" style="background-image: url('https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=900&q=80');" role="img" aria-label="Custom paver patio installation"></div>
+      <div class="work-tile" style="background-image: url('https://images.unsplash.com/photo-1574482620811-1aa16ffe3c82?auto=format&fit=crop&w=900&q=80');" role="img" aria-label="Native plant garden design"></div>
+      <div class="work-tile" style="background-image: url('https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=900&q=80');" role="img" aria-label="HOA common-area landscape"></div>
+      <div class="work-tile" style="background-image: url('https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=900&q=80');" role="img" aria-label="Backyard transformation"></div>
+    </div>
+    <!-- TODO: replace Unsplash placeholders with real before/after photos from Antonis jobs -->
+  </div>
+</section>
+
+<!-- SERVICE AREA -->
+<section id="area">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Where we work</span>
+      <h2>Serving homes and properties across LA County.</h2>
+      <p>Crews regularly in the San Fernando Valley, the Westside, Downtown, the South Bay, East LA, the San Gabriel Valley, and the foothills. If you're not sure we cover your area — just call. We probably do.</p>
+    </div>
+    <div class="city-tags">
+      <span>Mission Hills</span><span>Granada Hills</span><span>North Hills</span><span>Panorama City</span><span>Northridge</span><span>Arleta</span><span>Sylmar</span>
+      <span>Sherman Oaks</span><span>Encino</span><span>Studio City</span><span>Toluca Lake</span><span>Tarzana</span><span>Woodland Hills</span><span>Calabasas</span>
+      <span>Burbank</span><span>Glendale</span><span>Pasadena</span><span>South Pasadena</span><span>La Cañada Flintridge</span><span>Arcadia</span>
+      <span>Silver Lake</span><span>Los Feliz</span><span>Brentwood</span><span>Santa Monica</span><span>Culver City</span><span>Cheviot Hills</span>
+      <span>Palms</span><span>Mar Vista</span><span>Westchester</span><span>El Segundo</span><span>Manhattan Beach</span><span>Torrance</span>
+      <span>Long Beach</span><span>Whittier</span><span>Monterey Park</span><span>Alhambra</span>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">What clients say</span>
+      <h2>Don't take our word for it.</h2>
+    </div>
+    <!-- TODO: replace placeholder testimonials with real customer quotes once GBP reviews are live -->
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <blockquote>I had tried three different landscaping crews before I found Antonis. They show up on time every week, the yard has never looked better, and I actually get texts back. Totally different experience.</blockquote>
+        <cite><strong>Maria G.</strong>Sherman Oaks</cite>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <blockquote>We did a full front-yard drought conversion with Antonis. The design is gorgeous, my water bill dropped, and they walked me through the LADWP rebate paperwork. Couldn't recommend them more.</blockquote>
+        <cite><strong>David R.</strong>Pasadena</cite>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <blockquote>Our HOA finally has a landscaper we don't have to chase down. Clean, professional, and the communication is night-and-day better than our last vendor.</blockquote>
+        <cite><strong>Jenna W.</strong>HOA Board, Brentwood</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS STRIP -->
+<section class="credentials">
+  <div class="container">
+    <div class="cred-grid">
+      <div class="cred-item">
+        <div class="cred-title">CSLB #768466</div>
+        <div class="cred-sub">California Licensed</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-title">Bonded</div>
+        <div class="cred-sub">Proof on request</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-title">Insured</div>
+        <div class="cred-sub">Full workers' comp</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-title">Bilingual</div>
+        <div class="cred-sub">English &amp; Spanish</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Common questions</span>
+      <h2>Frequently asked.</h2>
+    </div>
+    <div class="faq-list">
+      <details>
+        <summary>How much does regular landscape maintenance cost?</summary>
+        <div>Pricing depends on lot size, scope, and frequency, but most of our residential maintenance plans start around $120 per visit for bi-weekly service on a standard LA lot. We give a firm written quote after a free on-site visit so there are no surprises.</div>
+      </details>
+      <details>
+        <summary>Are you licensed and insured?</summary>
+        <div>Yes. We're a California-licensed contractor (CSLB #768466), fully insured, and carry workers' compensation for every member of our crew. We're happy to send proof of insurance before any job.</div>
+      </details>
+      <details>
+        <summary>Do you help with the LADWP turf replacement rebate?</summary>
+        <div>Yes. We design the landscape, handle the install, and guide you through the LADWP application so you can claim the rebate. Ask us for a free rebate-eligibility check on your yard.</div>
+      </details>
+      <details>
+        <summary>How fast can you come out?</summary>
+        <div>In most of LA County we can schedule a free estimate within 2–3 business days and start routine maintenance the week after. Installs and design projects are booked a few weeks out depending on scope.</div>
+      </details>
+      <details>
+        <summary>Do you service commercial and HOA properties?</summary>
+        <div>Yes. We maintain multifamily, HOA common areas, retail plazas, and small office parks across LA County. We'll walk the property with your board or property manager and put together a tailored monthly proposal with fixed pricing.</div>
+      </details>
+      <details>
+        <summary>Are your crews bilingual?</summary>
+        <div>Yes. English and Spanish on every crew, so whether you want to chat with the foreman on site or get a written proposal, communication is never an issue.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE FORM -->
+<section id="quote" class="form-section">
+  <div class="container-narrow">
+    <div class="section-head">
+      <span class="eyebrow">Free estimate</span>
+      <h2>Tell us about your property.</h2>
+      <p>We'll come by for a free on-site estimate and send a written quote within 48 hours.</p>
+    </div>
+    <div class="form-wrap">
+      <!-- CONFIGURE: replace YOUR_FORM_ID with a real Formspree form ID. Sign up free at formspree.io,
+           create a form, and paste its ID (looks like 'mzbqkxgr') in place of YOUR_FORM_ID below.
+           Until then, the form will collect submissions but they won't be delivered. -->
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="hidden" name="_subject" value="New Antonis Landscaping quote request" />
+        <input type="hidden" name="_replyto" value="" />
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" required />
+          </div>
+          <div class="form-row">
+            <label for="phone">Phone number</label>
+            <input id="phone" name="phone" type="tel" required />
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required />
+          </div>
+          <div class="form-row">
+            <label for="zip">Property address or ZIP</label>
+            <input id="zip" name="zip" type="text" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="property-type">Type of property</label>
+          <select id="property-type" name="property-type" required>
+            <option value="">Choose one…</option>
+            <option>Single-family home</option>
+            <option>Condo / townhouse</option>
+            <option>HOA common area</option>
+            <option>Commercial / office / retail</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label>Services needed (check all that apply)</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="services[]" value="Maintenance" /> Maintenance</label>
+            <label><input type="checkbox" name="services[]" value="Design & install" /> Design &amp; install</label>
+            <label><input type="checkbox" name="services[]" value="Drought conversion" /> Drought conversion</label>
+            <label><input type="checkbox" name="services[]" value="One-time cleanup" /> One-time cleanup</label>
+            <label><input type="checkbox" name="services[]" value="Tree" /> Tree</label>
+            <label><input type="checkbox" name="services[]" value="Irrigation" /> Irrigation</label>
+            <label><input type="checkbox" name="services[]" value="Not sure" /> Not sure</label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label>Best way to reach you</label>
+          <div class="checkbox-group">
+            <label><input type="radio" name="contact-pref" value="Phone call" checked /> Phone call</label>
+            <label><input type="radio" name="contact-pref" value="Text" /> Text</label>
+            <label><input type="radio" name="contact-pref" value="Email" /> Email</label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="notes">Anything else we should know? (optional)</label>
+          <textarea id="notes" name="notes" rows="4" placeholder="Property size, specific concerns, when you'd like the work done, etc."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-solid btn-arrow">Send my request</button>
+        <p class="form-note">A real person from our team will call or text you within one business day. If you need us sooner, call <a href="tel:+18183996318">(818) 399-6318</a> — we pick up.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="container">
+    <span class="eyebrow light">Ready when you are</span>
+    <h2>Ready for a yard that <em>actually looks</em> like it belongs in LA?</h2>
+    <p>Tell us about your property and what you'd like done. We'll come by for a free on-site estimate and get you a written quote within 48 hours.</p>
+    <a href="#quote" class="btn btn-tan btn-arrow">Request my free estimate</a>
+    <div class="phone-line">Or call directly: <a href="tel:+18183996318">(818) 399-6318</a></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Antonis Landscaping</div>
+        <p class="footer-brand-sub">Family-owned Los Angeles landscaping. Weekly maintenance, full installs, drought conversions, and commercial grounds across LA County.</p>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <p><a href="tel:+18183996318">(818) 399-6318</a></p>
+        <p><a href="tel:+18188377699">(818) 837-7699</a></p>
+        <p><a href="mailto:antonislandscaping@yahoo.com">antonislandscaping@yahoo.com</a></p>
+      </div>
+      <div>
+        <h5>Service area</h5>
+        <p>All of Los Angeles County</p>
+        <p>English &amp; Spanish</p>
+        <p>Mon–Sat, 6am–3:30pm</p>
+      </div>
+      <div>
+        <h5>Credentials</h5>
+        <p>CSLB #768466</p>
+        <p>Licensed · Bonded · Insured</p>
+        <p>Workers' comp covered</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© <span id="year"></span> Antonis Landscaping Inc. All rights reserved.</div>
+      <div>Built for Los Angeles.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

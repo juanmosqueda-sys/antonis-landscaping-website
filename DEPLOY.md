@@ -21,11 +21,27 @@ If you'd rather I deploy it from here:
 2. Create a token (any name, no expiry needed for a one-shot deploy — you can revoke after)
 3. Paste it back to me in chat — I'll run the CLI and report the URL
 
+## Before going live — one-time configuration
+
+**Form backend (Formspree, 2 min, free):**
+1. Sign up at **formspree.io** with `antonislandscaping@yahoo.com`
+2. Create a new form, name it "Antonis quote requests"
+3. Copy the form ID (looks like `mzbqkxgr`)
+4. Open `index.html`, search for `YOUR_FORM_ID`, replace with the real ID
+5. Save & redeploy
+
+Without this step, the quote form will show "success" to visitors but won't actually deliver submissions.
+
+**Photos:** The portfolio grid and several backgrounds use Unsplash placeholders. Swap them for real Antonis before/after photos when you have them — search for `unsplash.com` in `index.html` to find every spot.
+
+**Testimonials:** The three customer quotes are placeholders from the canonical website copy. Replace with real quotes once GBP reviews start rolling in. Search for `<!-- TODO: replace placeholder testimonials` in `index.html`.
+
 ## After it's live
 
 - Add the URL to the **Website** field in your Google Business Profile draft
 - Put the URL in the footer of the Indeed / Craigslist / Facebook job posts
 - Drop it into the Antonis Marketing Strategy doc as the canonical web home
+- Submit the URL to **Google Search Console** (`search.google.com/search-console`) to speed up indexing
 
 ## To edit later
 
