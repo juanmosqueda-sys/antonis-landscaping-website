@@ -7,8 +7,8 @@
 <meta name="description" content="Family-owned, fully insured Los Angeles landscaping company. Weekly maintenance, full installs, drought-tolerant conversions, LADWP rebate assistance. Free estimates." />
 <meta name="keywords" content="Los Angeles landscaper, landscape maintenance LA, drought-tolerant landscaping Los Angeles, turf replacement rebate, LADWP landscaper, landscape design Los Angeles, San Fernando Valley landscaper" />
 <meta name="theme-color" content="#093d77" />
-<link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
-<link rel="apple-touch-icon" href="assets/logo.svg" />
+<link rel="icon" href="assets/logo.png" type="image/png" />
+<link rel="apple-touch-icon" href="assets/logo.png" />
 <meta property="og:title" content="Antoni's Landscaping — A Los Angeles Landscaper Who Actually Shows Up." />
 <meta property="og:description" content="Family-owned, fully insured. Weekly maintenance, design &amp; install, drought conversions, LADWP rebate help. CSLB #768466. English &amp; Spanish." />
 <meta property="og:type" content="website" />
@@ -161,10 +161,26 @@
     font-family: var(--serif); font-weight: 600; font-size: 1.25rem;
     line-height: 1;
   }
-  /* Real brand SVG logo from antonislandscaping.com — replaces the .logo-mark text fallback above. */
-  .logo-mark-svg {
-    height: 32px; width: auto;
+  /* Real brand logo from antonislandscaping.com (file: "Antoni's Logo for Hats.png").
+     Replaces the .logo-mark text fallback above. Square PNG, displayed as an icon mark
+     next to the brand wordmark text. */
+  .logo-mark-img {
+    height: 40px; width: 40px;
     display: block;
+    border-radius: 8px;
+    object-fit: contain;
+  }
+  .logo-wordmark {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--charcoal);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+  /* On very small mobile, hide the wordmark so just the icon shows in the nav */
+  @media (max-width: 480px) {
+    .logo-wordmark { display: none; }
   }
   .nav-links { display: none; gap: 32px; flex: 1; justify-content: center; }
   .nav-links a {
@@ -878,7 +894,8 @@
 <header>
   <div class="nav">
     <a href="#top" class="logo">
-      <img src="assets/logo.svg" alt="Antoni's Landscaping logo" class="logo-mark-svg" />
+      <img src="assets/logo.png" alt="Antoni's Landscaping logo" class="logo-mark-img" />
+      <span class="logo-wordmark">Antoni's Landscaping</span>
     </a>
     <nav class="nav-links">
       <a href="#services">Services</a>
