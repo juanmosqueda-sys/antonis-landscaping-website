@@ -15,7 +15,7 @@
 <meta property="og:image" content="https://img1.wsimg.com/isteam/ip/da22fe0a-b0dc-4871-bb27-3ecdaa4f4f06/DSC00425.jpg/:/rs=w:1600,h:900,m:cr" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=League+Spartan:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=League+Spartan:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <!-- Schema.org LocalBusiness — helps Google's local search and rich snippets -->
 <script type="application/ld+json">
@@ -75,31 +75,32 @@
 </script>
 <style>
   :root {
-    /* Brand palette — navy from Antoni's existing brand (logo + headings on antonislandscaping.com).
-       Variable names kept as --green/--sage for backwards-compat with the existing class rules,
-       but the values now reflect the real brand color #0c519e. */
-    --green: #0c519e;
-    --green-dark: #093d77;
-    --green-deep: #062a55;
-    --sage: #7fa7d4;
-    --charcoal: #1a1a1a;
-    --charcoal-soft: #2c2c2c;
-    --cream: #f7f5ef;
-    --cream-warm: #efe9d8;
-    --tan: #d4c4a0;
-    --tan-soft: #e8e2d1;
-    --text: #1a1a1a;
-    --text-muted: #5a5a5a;
-    --text-soft: #7a7a7a;
-    --border: #e0dccf;
-    --border-strong: #c8c0a8;
-    --shadow: 0 4px 24px rgba(26,26,26,0.08);
-    --shadow-lg: 0 16px 48px rgba(26,26,26,0.14);
-    --shadow-xl: 0 24px 60px rgba(26,26,26,0.18);
-    --radius: 12px;
-    --radius-lg: 20px;
-    --serif: 'Fraunces', Georgia, serif;
+    /* Brand palette — royal blue + white. Antoni's primary company colors.
+       Variable names kept as --green/--sage for backwards-compat with existing class rules;
+       values are now royal blue. Pure white + cool light gray replace the earlier warm cream/tan. */
+    --green: #1e40af;          /* royal blue — primary brand */
+    --green-dark: #1e3a8a;     /* hover / active state */
+    --green-deep: #172554;     /* deepest navy for dark sections */
+    --sage: #60a5fa;           /* lighter blue accent */
+    --charcoal: #0f172a;        /* slate-900, cool dark instead of pure black */
+    --charcoal-soft: #1e293b;
+    --cream: #ffffff;           /* pure white background */
+    --cream-warm: #f8fafc;      /* very light cool gray for alt sections (slate-50) */
+    --tan: #cbd5e1;             /* cool light gray, replaces warm tan (slate-300) */
+    --tan-soft: #e2e8f0;        /* slate-200 */
+    --text: #0f172a;
+    --text-muted: #475569;      /* slate-600 */
+    --text-soft: #64748b;       /* slate-500 */
+    --border: #e5e7eb;          /* gray-200 */
+    --border-strong: #cbd5e1;   /* slate-300 */
+    --shadow: 0 1px 3px rgba(15,23,42,0.06), 0 4px 12px rgba(15,23,42,0.04);
+    --shadow-lg: 0 4px 12px rgba(15,23,42,0.08), 0 16px 32px rgba(15,23,42,0.06);
+    --shadow-xl: 0 8px 24px rgba(15,23,42,0.10), 0 24px 48px rgba(15,23,42,0.08);
+    --radius: 10px;
+    --radius-lg: 16px;
+    --brand: 'League Spartan', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --serif: var(--brand);      /* legacy alias — anywhere code says var(--serif), it now uses the brand sans */
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -115,11 +116,11 @@
   img { max-width: 100%; display: block; }
   .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
   .container-narrow { max-width: 880px; margin: 0 auto; padding: 0 24px; }
-  h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; line-height: 1.1; color: var(--charcoal); letter-spacing: -0.015em; }
-  h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 600; }
-  h2 { font-size: clamp(1.8rem, 4vw, 3rem); margin-bottom: 0.6em; }
-  h3 { font-size: 1.35rem; margin-bottom: 0.4em; font-weight: 600; }
-  h4 { font-size: 1.1rem; margin-bottom: 0.3em; font-family: var(--sans); font-weight: 600; }
+  h1, h2, h3, h4 { font-family: var(--brand); font-weight: 700; line-height: 1.1; color: var(--charcoal); letter-spacing: -0.025em; }
+  h1 { font-size: clamp(2.2rem, 5.5vw, 4rem); font-weight: 800; }
+  h2 { font-size: clamp(1.7rem, 3.6vw, 2.6rem); margin-bottom: 0.6em; font-weight: 700; }
+  h3 { font-size: 1.25rem; margin-bottom: 0.4em; font-weight: 600; letter-spacing: -0.015em; }
+  h4 { font-size: 1.05rem; margin-bottom: 0.3em; font-family: var(--sans); font-weight: 600; letter-spacing: -0.01em; }
   p { color: var(--text); }
   .eyebrow {
     font-family: var(--sans);
@@ -137,9 +138,9 @@
   /* ---------- Header ---------- */
   header {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(247,245,239,0.96);
+    background: rgba(255,255,255,0.95);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(192,184,160,0.4);
+    border-bottom: 1px solid var(--border);
     transition: background 0.2s ease;
   }
   .nav {
@@ -229,10 +230,8 @@
     margin-bottom: 22px;
     text-shadow: 0 2px 30px rgba(0,0,0,0.3);
   }
-  .hero h1 em {
-    font-style: italic; font-weight: 400;
-    color: var(--tan);
-  }
+  /* (hero h1 no longer uses an em — kept rule as a no-op for safety) */
+  .hero h1 em { font-style: normal; }
   .hero .subhead {
     color: rgba(247,245,239,0.92);
     font-size: clamp(1.05rem, 1.6vw, 1.3rem);
@@ -613,8 +612,116 @@
 
   /* ---------- Quote form ---------- */
   .form-section {
-    background: linear-gradient(180deg, var(--cream) 0%, var(--cream-warm) 100%);
+    background: var(--cream-warm);
   }
+
+  /* ---------- Estimate generator ---------- */
+  .estimator-grid {
+    display: grid; gap: 28px;
+    grid-template-columns: 1fr;
+    max-width: 1100px; margin: 0 auto;
+  }
+  @media (min-width: 920px) {
+    .estimator-grid { grid-template-columns: 1.45fr 1fr; align-items: start; gap: 36px; }
+  }
+  .estimator-form {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+  }
+  @media (min-width: 600px) { .estimator-form { padding: 40px; } }
+  .estimate-panel {
+    background: var(--green-deep);
+    color: #fff;
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    box-shadow: var(--shadow-lg);
+  }
+  @media (min-width: 920px) { .estimate-panel { position: sticky; top: 96px; } }
+  .estimate-panel-inner { display: flex; flex-direction: column; }
+  .estimate-eyebrow.eyebrow { color: var(--sage); }
+  .estimate-amount {
+    font-family: var(--brand);
+    font-size: clamp(2.2rem, 4.6vw, 3rem);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.035em;
+    margin-top: 4px;
+    line-height: 1.05;
+  }
+  .estimate-unit {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.95rem;
+    margin-top: 2px;
+    margin-bottom: 22px;
+  }
+  .estimate-meta {
+    border-top: 1px solid rgba(255,255,255,0.14);
+    padding-top: 18px;
+    display: grid; gap: 11px;
+  }
+  .estimate-meta-item {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 0.92rem;
+    gap: 12px;
+  }
+  .meta-label { color: rgba(255,255,255,0.6); flex-shrink: 0; }
+  .meta-value { color: #fff; font-weight: 500; text-align: right; }
+  .estimate-rebate {
+    background: rgba(96,165,250,0.12);
+    border: 1px solid rgba(96,165,250,0.3);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 18px;
+    display: flex; gap: 12px;
+    align-items: flex-start;
+  }
+  .estimate-rebate svg { color: var(--sage); flex-shrink: 0; width: 22px; height: 22px; margin-top: 1px; stroke-width: 2; }
+  .estimate-rebate strong { color: #fff; display: block; margin-bottom: 4px; font-size: 0.92rem; }
+  .estimate-rebate p { color: rgba(255,255,255,0.78); font-size: 0.84rem; line-height: 1.5; margin: 0; }
+  .estimate-caveat {
+    margin-top: 22px;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.55;
+  }
+  .form-divider {
+    border-top: 1px solid var(--border);
+    margin: 28px 0 22px;
+  }
+  .field-hint {
+    margin-top: 6px;
+    font-size: 0.82rem;
+    color: var(--text-soft);
+  }
+  label .optional {
+    color: var(--text-soft);
+    font-weight: 400;
+    font-size: 0.85em;
+  }
+  input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px dashed var(--border-strong);
+    border-radius: 10px;
+    background: var(--cream-warm);
+    font-family: inherit; font-size: 0.92rem;
+    cursor: pointer;
+  }
+  input[type="file"]::file-selector-button {
+    background: var(--green);
+    color: #fff;
+    border: 0;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-family: var(--brand);
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-right: 12px;
+    cursor: pointer;
+  }
+
   .form-wrap {
     max-width: 760px; margin: 0 auto;
     background: #fff;
@@ -682,7 +789,7 @@
   }
   .final-cta .eyebrow { color: var(--tan); }
   .final-cta h2 { color: var(--cream); margin-bottom: 22px; }
-  .final-cta h2 em { font-style: italic; font-weight: 400; color: var(--tan); }
+  .final-cta h2 em { font-style: normal; color: var(--sage); }
   .final-cta p { color: rgba(247,245,239,0.85); max-width: 620px; margin: 0 auto 36px; font-size: 1.1rem; line-height: 1.6; }
   .final-cta .phone-line {
     margin-top: 28px; color: rgba(247,245,239,0.78); font-size: 0.95rem;
@@ -763,13 +870,13 @@
   .ribbon-inner { max-width: 760px; }
   .ribbon-text .eyebrow.light { color: var(--tan); }
   .ribbon-text h2 { color: var(--cream); margin-bottom: 22px; }
-  .ribbon-text h2 em { color: var(--tan); font-style: italic; font-weight: 400; }
+  .ribbon-text h2 em { color: var(--sage); font-style: normal; }
   .ribbon-text p {
     color: rgba(247,245,239,0.88);
     font-size: 1.08rem; line-height: 1.65;
     margin-bottom: 32px;
   }
-  .ribbon-text p em { color: var(--tan); font-style: italic; }
+  .ribbon-text p em { color: var(--sage); font-style: normal; font-weight: 600; }
 
   /* ---------- Work / Portfolio grid ---------- */
   .work-grid {
@@ -925,7 +1032,7 @@
 <section class="hero" id="top">
   <div class="container hero-inner">
     <span class="eyebrow light">Family-owned · Licensed · Bonded · Insured</span>
-    <h1>A Los Angeles landscaper who <em>actually shows up.</em></h1>
+    <h1>The Los Angeles landscaper that shows up.</h1>
     <p class="subhead">Family-owned and operated. Weekly maintenance, full landscape design and installation, drought-tolerant conversions, and LADWP rebate help — all from one bilingual crew that treats your property like our own.</p>
     <div class="hero-buttons">
       <a href="#quote" class="btn btn-primary btn-arrow">Get my free estimate</a>
@@ -1245,89 +1352,256 @@
   </div>
 </section>
 
-<!-- QUOTE FORM -->
+<!-- ESTIMATE GENERATOR + LEAD CAPTURE -->
 <section id="quote" class="form-section">
-  <div class="container-narrow">
+  <div class="container">
     <div class="section-head">
-      <span class="eyebrow">Free estimate</span>
-      <h2>Tell us about your property.</h2>
-      <p>We'll come by for a free on-site estimate and send a written quote within 48 hours.</p>
+      <span class="eyebrow">Free instant estimate</span>
+      <h2>Get a price range in 30 seconds.</h2>
+      <p>Tell us about your project and see the estimate update as you fill it out. We confirm the final number with a free on-site visit — no obligation.</p>
     </div>
-    <div class="form-wrap">
-      <!-- CONFIGURE: replace YOUR_FORM_ID with a real Formspree form ID. Sign up free at formspree.io,
-           create a form, and paste its ID (looks like 'mzbqkxgr') in place of YOUR_FORM_ID below.
-           Until then, the form will collect submissions but they won't be delivered. -->
-      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <input type="hidden" name="_subject" value="New Antoni's Landscaping quote request" />
-        <input type="hidden" name="_replyto" value="" />
 
-        <div class="form-grid">
-          <div class="form-row">
-            <label for="name">Full name</label>
-            <input id="name" name="name" type="text" required />
-          </div>
-          <div class="form-row">
-            <label for="phone">Phone number</label>
-            <input id="phone" name="phone" type="tel" required />
-          </div>
-        </div>
-
-        <div class="form-grid">
-          <div class="form-row">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" required />
-          </div>
-          <div class="form-row">
-            <label for="zip">Property address or ZIP</label>
-            <input id="zip" name="zip" type="text" required />
-          </div>
-        </div>
+    <div class="estimator-grid">
+      <!-- LEFT: form -->
+      <!-- CONFIGURE: replace YOUR_FORM_ID with a real Formspree form ID from formspree.io.
+           Without that, the form looks like it submits but Antoni's never receives the lead. -->
+      <form id="estimator-form" class="estimator-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_subject" value="New Antoni's Landscaping estimate request" />
+        <input type="hidden" name="estimate" id="estimate-hidden" value="" />
 
         <div class="form-row">
-          <label for="property-type">Type of property</label>
-          <select id="property-type" name="property-type" required>
-            <option value="">Choose one…</option>
-            <option>Single-family home</option>
-            <option>Condo / townhouse</option>
-            <option>HOA common area</option>
-            <option>Commercial / office / retail</option>
-            <option>Other</option>
+          <label for="est-service">Service</label>
+          <select id="est-service" name="service" required>
+            <option value="maintenance">Recurring maintenance (mow, edge, trim)</option>
+            <option value="cleanup">One-time cleanup / overgrowth removal</option>
+            <option value="install">Landscape design &amp; install</option>
+            <option value="drought">Drought conversion / turf replacement</option>
+            <option value="tree">Tree trimming / removal</option>
+            <option value="other">Other (we'll talk on the call)</option>
+          </select>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="est-property">Property type</label>
+            <select id="est-property" name="property-type" required>
+              <option value="residential">Single-family home</option>
+              <option value="condo">Condo / townhouse</option>
+              <option value="hoa">HOA common area</option>
+              <option value="commercial">Commercial / office / retail</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="est-size">Yard / project size</label>
+            <select id="est-size" name="size" required>
+              <option value="small">Small &mdash; under 500 sq ft</option>
+              <option value="medium" selected>Medium &mdash; 500–2,000 sq ft</option>
+              <option value="large">Large &mdash; 2,000–5,000 sq ft</option>
+              <option value="xlarge">Extra large &mdash; 5,000+ sq ft</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row" id="frequency-row">
+          <label for="est-frequency">How often?</label>
+          <select id="est-frequency" name="frequency">
+            <option value="weekly" selected>Weekly</option>
+            <option value="biweekly">Biweekly (every other week)</option>
+            <option value="monthly">Monthly</option>
           </select>
         </div>
 
         <div class="form-row">
-          <label>Services needed (check all that apply)</label>
-          <div class="checkbox-group">
-            <label><input type="checkbox" name="services[]" value="Maintenance" /> Maintenance</label>
-            <label><input type="checkbox" name="services[]" value="Design & install" /> Design &amp; install</label>
-            <label><input type="checkbox" name="services[]" value="Drought conversion" /> Drought conversion</label>
-            <label><input type="checkbox" name="services[]" value="One-time cleanup" /> One-time cleanup</label>
-            <label><input type="checkbox" name="services[]" value="Tree" /> Tree</label>
-            <label><input type="checkbox" name="services[]" value="Irrigation" /> Irrigation</label>
-            <label><input type="checkbox" name="services[]" value="Not sure" /> Not sure</label>
-          </div>
+          <label for="est-photo">Photo of the space <span class="optional">— optional but recommended</span></label>
+          <input id="est-photo" name="photo" type="file" accept="image/*" />
+          <p class="field-hint">Helps us understand the project. Antoni's reviews every photo personally.</p>
         </div>
 
         <div class="form-row">
-          <label>Best way to reach you</label>
-          <div class="checkbox-group">
-            <label><input type="radio" name="contact-pref" value="Phone call" checked /> Phone call</label>
-            <label><input type="radio" name="contact-pref" value="Text" /> Text</label>
-            <label><input type="radio" name="contact-pref" value="Email" /> Email</label>
+          <label for="est-notes">Anything else? <span class="optional">— optional</span></label>
+          <textarea id="est-notes" name="notes" rows="3" placeholder="Access constraints, timing, specific concerns…"></textarea>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="est-name">Full name</label>
+            <input id="est-name" name="name" type="text" required />
+          </div>
+          <div class="form-row">
+            <label for="est-phone">Phone</label>
+            <input id="est-phone" name="phone" type="tel" required />
           </div>
         </div>
 
-        <div class="form-row">
-          <label for="notes">Anything else we should know? (optional)</label>
-          <textarea id="notes" name="notes" rows="4" placeholder="Property size, specific concerns, when you'd like the work done, etc."></textarea>
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="est-email">Email</label>
+            <input id="est-email" name="email" type="email" required />
+          </div>
+          <div class="form-row">
+            <label for="est-zip">Property ZIP code</label>
+            <input id="est-zip" name="zip" type="text" required inputmode="numeric" pattern="[0-9]{5}" />
+          </div>
         </div>
 
-        <button type="submit" class="btn btn-solid btn-arrow">Send my request</button>
+        <button type="submit" class="btn btn-solid btn-arrow">Send request &amp; lock in this estimate</button>
         <p class="form-note">A real person from our team will call or text you within one business day. If you need us sooner, call <a href="tel:+18183996318">(818) 399-6318</a> — we pick up.</p>
       </form>
+
+      <!-- RIGHT: live estimate panel -->
+      <aside class="estimate-panel" aria-live="polite">
+        <div class="estimate-panel-inner">
+          <div class="eyebrow estimate-eyebrow">Estimated range</div>
+          <div class="estimate-amount" id="estimate-amount">$150 – $210</div>
+          <div class="estimate-unit" id="estimate-unit">per visit</div>
+
+          <div class="estimate-meta">
+            <div class="estimate-meta-item">
+              <span class="meta-label">Service</span>
+              <span class="meta-value" id="meta-service">Recurring maintenance</span>
+            </div>
+            <div class="estimate-meta-item">
+              <span class="meta-label">Property</span>
+              <span class="meta-value" id="meta-property">Single-family</span>
+            </div>
+            <div class="estimate-meta-item">
+              <span class="meta-label">Size</span>
+              <span class="meta-value" id="meta-size">500–2,000 sq ft</span>
+            </div>
+            <div class="estimate-meta-item" id="meta-frequency-wrap">
+              <span class="meta-label">Frequency</span>
+              <span class="meta-value" id="meta-frequency">Weekly</span>
+            </div>
+          </div>
+
+          <div class="estimate-rebate" id="estimate-rebate" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+            <div>
+              <strong>LADWP rebate may apply.</strong>
+              <p>We handle the paperwork — typical rebate is up to $3 per square foot of removed turf, applied to your final invoice.</p>
+            </div>
+          </div>
+
+          <p class="estimate-caveat">This is an estimate based on typical LA-market rates. We confirm the final price with a free on-site visit — no obligation, no pressure.</p>
+        </div>
+      </aside>
     </div>
   </div>
 </section>
+
+<script>
+  // ---------- Estimate generator: pricing model ----------
+  // CONFIGURE: tune these numbers to Antoni's actual price book. Current values are
+  // reasonable LA-market defaults from public landscaping pricing data — likely close
+  // but not exact. Edit SIZES, FREQ_MULT, PROPERTY_MULT, RANGE to calibrate.
+  const SIZES = {
+    small:  { label: 'under 500 sq ft',    avgSqft:  350, maint: 120, cleanup:  280, install: [4.0, 8.0], drought: [8.0, 15.0], tree: 350 },
+    medium: { label: '500–2,000 sq ft',    avgSqft: 1200, maint: 180, cleanup:  500, install: [4.5, 8.5], drought: [8.5, 15.5], tree: 500 },
+    large:  { label: '2,000–5,000 sq ft',  avgSqft: 3500, maint: 260, cleanup:  850, install: [4.5, 9.0], drought: [9.0, 16.0], tree: 700 },
+    xlarge: { label: '5,000+ sq ft',       avgSqft: 7500, maint: 380, cleanup: 1400, install: [5.0, 10.0], drought: [10.0, 18.0], tree: 1000 },
+  };
+  const FREQ_MULT = { weekly: 1.0, biweekly: 1.08, monthly: 1.25 };          // less frequent = higher per-visit (route inefficiency)
+  const PROPERTY_MULT = { residential: 1.0, condo: 1.0, hoa: 1.20, commercial: 1.25 };  // commercial/HOA carries more overhead
+  const RANGE = 0.18;  // ±18% confidence band on the displayed range
+
+  const SERVICE_LABEL = {
+    maintenance: 'Recurring maintenance',
+    cleanup: 'One-time cleanup',
+    install: 'Design & install',
+    drought: 'Drought conversion',
+    tree: 'Tree work',
+    other: 'Custom project',
+  };
+  const PROPERTY_LABEL = {
+    residential: 'Single-family',
+    condo: 'Condo / townhouse',
+    hoa: 'HOA common area',
+    commercial: 'Commercial',
+  };
+  const FREQ_LABEL = { weekly: 'Weekly', biweekly: 'Biweekly', monthly: 'Monthly' };
+
+  function fmtMoney(n) {
+    // Round to nearest $10 for clean display
+    return '$' + (Math.round(n / 10) * 10).toLocaleString();
+  }
+
+  function computeEstimate() {
+    const service   = document.getElementById('est-service').value;
+    const property  = document.getElementById('est-property').value;
+    const size      = document.getElementById('est-size').value;
+    const frequency = document.getElementById('est-frequency').value;
+    const sizeData  = SIZES[size];
+    const propMult  = PROPERTY_MULT[property] || 1.0;
+
+    let mid = null, unit = '', rebate = false;
+
+    if (service === 'maintenance') {
+      mid  = sizeData.maint * propMult * (FREQ_MULT[frequency] || 1.0);
+      unit = 'per visit';
+    } else if (service === 'cleanup') {
+      mid  = sizeData.cleanup * propMult;
+      unit = 'one-time';
+    } else if (service === 'install') {
+      const [lo, hi] = sizeData.install;
+      mid  = ((lo + hi) / 2) * sizeData.avgSqft * propMult;
+      unit = 'project total';
+    } else if (service === 'drought') {
+      const [lo, hi] = sizeData.drought;
+      mid  = ((lo + hi) / 2) * sizeData.avgSqft * propMult;
+      unit = 'project total';
+      rebate = true;
+    } else if (service === 'tree') {
+      mid  = sizeData.tree * propMult;
+      unit = 'per tree';
+    }
+    // 'other' returns null mid -> "Custom quote"
+
+    return { mid, unit, rebate, service, property, size, frequency };
+  }
+
+  function renderEstimate() {
+    const r = computeEstimate();
+    const amount    = document.getElementById('estimate-amount');
+    const unit      = document.getElementById('estimate-unit');
+    const rebate    = document.getElementById('estimate-rebate');
+    const hidden    = document.getElementById('estimate-hidden');
+    const freqRow   = document.getElementById('frequency-row');
+    const freqMeta  = document.getElementById('meta-frequency-wrap');
+
+    if (r.mid === null) {
+      amount.textContent = 'Custom quote';
+      unit.textContent   = "we'll call to scope it";
+      hidden.value       = 'Custom — pending call';
+    } else {
+      const lo = r.mid * (1 - RANGE);
+      const hi = r.mid * (1 + RANGE);
+      amount.textContent = fmtMoney(lo) + ' – ' + fmtMoney(hi);
+      unit.textContent   = r.unit;
+      hidden.value       = fmtMoney(lo) + ' – ' + fmtMoney(hi) + ' (' + r.unit + ')';
+    }
+
+    // Meta strip
+    document.getElementById('meta-service').textContent  = SERVICE_LABEL[r.service]   || '—';
+    document.getElementById('meta-property').textContent = PROPERTY_LABEL[r.property] || '—';
+    document.getElementById('meta-size').textContent     = SIZES[r.size]?.label       || '—';
+    document.getElementById('meta-frequency').textContent = FREQ_LABEL[r.frequency]   || '—';
+
+    // Conditional reveals
+    rebate.hidden = !r.rebate;
+    const showFreq = (r.service === 'maintenance');
+    freqRow.style.display  = showFreq ? '' : 'none';
+    freqMeta.style.display = showFreq ? '' : 'none';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    ['est-service','est-property','est-size','est-frequency'].forEach(id => {
+      document.getElementById(id).addEventListener('change', renderEstimate);
+    });
+    renderEstimate();
+  });
+</script>
 
 <!-- FINAL CTA -->
 <section class="final-cta">
