@@ -677,6 +677,244 @@
     display: flex; gap: 12px;
     align-items: flex-start;
   }
+  /* Honor the HTML [hidden] attribute — overrides display:flex above when JS toggles it */
+  [hidden] { display: none !important; }
+
+  /* ---------- Chatbot estimator ---------- */
+  .chat-section { background: var(--cream-warm); }
+  .chat-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    max-width: 720px; margin: 0 auto;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    min-height: 580px; height: 72vh; max-height: 760px;
+  }
+  .chat-card-header {
+    background: var(--green);
+    color: #fff;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 14px;
+    flex-shrink: 0;
+  }
+  .chat-avatar {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    background: #fff;
+    padding: 4px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .chat-id { flex: 1; min-width: 0; }
+  .chat-name {
+    font-family: var(--brand);
+    font-weight: 700; font-size: 1rem;
+    letter-spacing: -0.01em;
+  }
+  .chat-status {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.78);
+    display: flex; align-items: center; gap: 6px;
+    margin-top: 2px;
+  }
+  .status-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 0 3px rgba(74,222,128,0.22);
+    display: inline-block;
+    animation: status-pulse 2s ease-in-out infinite;
+  }
+  @keyframes status-pulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(74,222,128,0.22); }
+    50%      { box-shadow: 0 0 0 6px rgba(74,222,128,0.08); }
+  }
+  .chat-estimate-pill {
+    background: rgba(255,255,255,0.16);
+    border: 1px solid rgba(255,255,255,0.24);
+    border-radius: 100px;
+    padding: 7px 14px;
+    display: flex; flex-direction: column; align-items: flex-end;
+    line-height: 1.1;
+    flex-shrink: 0;
+  }
+  .pill-label {
+    font-family: var(--brand);
+    font-size: 0.66rem;
+    color: rgba(255,255,255,0.75);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2px;
+  }
+  .pill-value {
+    font-family: var(--brand);
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: #fff;
+    white-space: nowrap;
+  }
+
+  .chat-body {
+    flex: 1;
+    padding: 24px 20px;
+    overflow-y: auto;
+    display: flex; flex-direction: column;
+    gap: 10px;
+    background: var(--cream-warm);
+    scroll-behavior: smooth;
+  }
+  .chat-bubble {
+    max-width: 82%;
+    padding: 12px 16px;
+    border-radius: 16px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    animation: bubble-in 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    word-wrap: break-word;
+  }
+  .chat-bubble.bot {
+    background: #fff;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 4px;
+    align-self: flex-start;
+  }
+  .chat-bubble.user {
+    background: var(--green);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+    align-self: flex-end;
+  }
+  .chat-bubble strong { font-weight: 700; }
+  .chat-bubble.bot strong { color: var(--green); }
+  .chat-bubble.user strong { color: #fff; }
+
+  .chat-bubble.typing {
+    display: flex; gap: 4px;
+    padding: 14px 18px;
+    width: auto;
+  }
+  .chat-bubble.typing span {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--text-soft);
+    animation: typing-dot 1.2s ease-in-out infinite;
+  }
+  .chat-bubble.typing span:nth-child(2) { animation-delay: 0.15s; }
+  .chat-bubble.typing span:nth-child(3) { animation-delay: 0.30s; }
+
+  @keyframes bubble-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes typing-dot {
+    0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+    30%           { opacity: 1; transform: translateY(-5px); }
+  }
+
+  .chat-input-area {
+    background: #fff;
+    border-top: 1px solid var(--border);
+    padding: 14px 18px;
+    min-height: 64px;
+    flex-shrink: 0;
+  }
+  .chip-row {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .chip {
+    padding: 9px 16px;
+    border: 1.5px solid var(--green);
+    background: #fff;
+    color: var(--green);
+    border-radius: 100px;
+    font-family: var(--brand);
+    font-weight: 600;
+    font-size: 0.88rem;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+  }
+  .chip:hover { background: var(--green); color: #fff; }
+  .chip:active { transform: scale(0.97); }
+
+  .chat-form {
+    display: flex; gap: 10px;
+  }
+  .chat-form input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid var(--border-strong);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    background: var(--cream);
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .chat-form input:focus { outline: none; border-color: var(--green); background: #fff; }
+  .chat-form input.chat-input-invalid { border-color: #dc2626; background: #fef2f2; }
+  .chat-form button {
+    background: var(--green);
+    color: #fff; border: 0;
+    border-radius: 10px;
+    padding: 0 20px;
+    cursor: pointer;
+    font-family: var(--brand);
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .chat-form button:hover { background: var(--green-dark); }
+  .chat-form button svg { width: 16px; height: 16px; }
+
+  .chat-file-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px;
+    background: var(--green); color: #fff;
+    border-radius: 100px;
+    cursor: pointer;
+    font-family: var(--brand); font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.15s ease;
+  }
+  .chat-file-label:hover { background: var(--green-dark); }
+  .chat-file-label input[type="file"] { display: none; }
+  .chat-file-skip {
+    margin-left: 10px;
+    color: var(--text-soft);
+    font-size: 0.88rem;
+    font-family: var(--brand);
+    font-weight: 600;
+    background: none; border: 0;
+    cursor: pointer;
+    padding: 10px 12px;
+  }
+  .chat-file-skip:hover { color: var(--text); text-decoration: underline; }
+
+  .chat-fallback {
+    text-align: center;
+    margin: 18px auto 0;
+    max-width: 720px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  .chat-fallback a { color: var(--green); font-weight: 700; }
+
+  /* Mobile tweaks */
+  @media (max-width: 640px) {
+    .chat-card { height: 70vh; min-height: 520px; max-height: 640px; border-radius: var(--radius); }
+    .chat-card-header { padding: 12px 14px; gap: 10px; }
+    .chat-avatar { width: 36px; height: 36px; }
+    .chat-name { font-size: 0.95rem; }
+    .chat-status { font-size: 0.72rem; }
+    .chat-estimate-pill { padding: 6px 10px; }
+    .pill-label { font-size: 0.62rem; }
+    .pill-value { font-size: 0.82rem; }
+    .chat-body { padding: 18px 14px; }
+    .chat-bubble { max-width: 88%; font-size: 0.92rem; padding: 11px 14px; }
+    .chat-input-area { padding: 12px 14px; }
+    .chip { padding: 9px 13px; font-size: 0.85rem; }
+  }
   .estimate-rebate svg { color: var(--sage); flex-shrink: 0; width: 22px; height: 22px; margin-top: 1px; stroke-width: 2; }
   .estimate-rebate strong { color: #fff; display: block; margin-bottom: 4px; font-size: 0.92rem; }
   .estimate-rebate p { color: rgba(255,255,255,0.78); font-size: 0.84rem; line-height: 1.5; margin: 0; }
@@ -1352,159 +1590,52 @@
   </div>
 </section>
 
-<!-- ESTIMATE GENERATOR + LEAD CAPTURE -->
-<section id="quote" class="form-section">
-  <div class="container">
+<!-- CHATBOT ESTIMATOR + LEAD CAPTURE -->
+<section id="quote" class="chat-section">
+  <div class="container-narrow">
     <div class="section-head">
       <span class="eyebrow">Free instant estimate</span>
       <h2>Get a price range in 30 seconds.</h2>
-      <p>Tell us about your project and see the estimate update as you fill it out. We confirm the final number with a free on-site visit — no obligation.</p>
+      <p>No awkward form — just a few quick questions. We confirm the final number with a free on-site visit.</p>
     </div>
 
-    <div class="estimator-grid">
-      <!-- LEFT: form -->
-      <!-- CONFIGURE: replace YOUR_FORM_ID with a real Formspree form ID from formspree.io.
-           Without that, the form looks like it submits but Antoni's never receives the lead. -->
-      <form id="estimator-form" class="estimator-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="_subject" value="New Antoni's Landscaping estimate request" />
-        <input type="hidden" name="estimate" id="estimate-hidden" value="" />
-
-        <div class="form-row">
-          <label for="est-service">Service</label>
-          <select id="est-service" name="service" required>
-            <option value="maintenance">Recurring maintenance (mow, edge, trim)</option>
-            <option value="cleanup">One-time cleanup / overgrowth removal</option>
-            <option value="install">Landscape design &amp; install</option>
-            <option value="drought">Drought conversion / turf replacement</option>
-            <option value="tree">Tree trimming / removal</option>
-            <option value="other">Other (we'll talk on the call)</option>
-          </select>
+    <div class="chat-card">
+      <header class="chat-card-header">
+        <img src="assets/logo.png" alt="" class="chat-avatar" />
+        <div class="chat-id">
+          <div class="chat-name">Antoni's Landscaping</div>
+          <div class="chat-status"><span class="status-dot" aria-hidden="true"></span> Replies instantly</div>
         </div>
-
-        <div class="form-grid">
-          <div class="form-row">
-            <label for="est-property">Property type</label>
-            <select id="est-property" name="property-type" required>
-              <option value="residential">Single-family home</option>
-              <option value="condo">Condo / townhouse</option>
-              <option value="hoa">HOA common area</option>
-              <option value="commercial">Commercial / office / retail</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label for="est-size">Yard / project size</label>
-            <select id="est-size" name="size" required>
-              <option value="small">Small &mdash; under 500 sq ft</option>
-              <option value="medium" selected>Medium &mdash; 500–2,000 sq ft</option>
-              <option value="large">Large &mdash; 2,000–5,000 sq ft</option>
-              <option value="xlarge">Extra large &mdash; 5,000+ sq ft</option>
-            </select>
-          </div>
+        <div class="chat-estimate-pill" id="chat-estimate-pill" hidden aria-live="polite">
+          <span class="pill-label">Your estimate</span>
+          <span class="pill-value" id="chat-estimate-value">—</span>
         </div>
+      </header>
 
-        <div class="form-row" id="frequency-row">
-          <label for="est-frequency">How often?</label>
-          <select id="est-frequency" name="frequency">
-            <option value="weekly" selected>Weekly</option>
-            <option value="biweekly">Biweekly (every other week)</option>
-            <option value="monthly">Monthly</option>
-          </select>
-        </div>
+      <div class="chat-body" id="chat-body" role="log" aria-live="polite" aria-label="Conversation with Antoni's Landscaping"></div>
 
-        <div class="form-row">
-          <label for="est-photo">Photo of the space <span class="optional">— optional but recommended</span></label>
-          <input id="est-photo" name="photo" type="file" accept="image/*" />
-          <p class="field-hint">Helps us understand the project. Antoni's reviews every photo personally.</p>
-        </div>
-
-        <div class="form-row">
-          <label for="est-notes">Anything else? <span class="optional">— optional</span></label>
-          <textarea id="est-notes" name="notes" rows="3" placeholder="Access constraints, timing, specific concerns…"></textarea>
-        </div>
-
-        <div class="form-divider"></div>
-
-        <div class="form-grid">
-          <div class="form-row">
-            <label for="est-name">Full name</label>
-            <input id="est-name" name="name" type="text" required />
-          </div>
-          <div class="form-row">
-            <label for="est-phone">Phone</label>
-            <input id="est-phone" name="phone" type="tel" required />
-          </div>
-        </div>
-
-        <div class="form-grid">
-          <div class="form-row">
-            <label for="est-email">Email</label>
-            <input id="est-email" name="email" type="email" required />
-          </div>
-          <div class="form-row">
-            <label for="est-zip">Property ZIP code</label>
-            <input id="est-zip" name="zip" type="text" required inputmode="numeric" pattern="[0-9]{5}" />
-          </div>
-        </div>
-
-        <button type="submit" class="btn btn-solid btn-arrow">Send request &amp; lock in this estimate</button>
-        <p class="form-note">A real person from our team will call or text you within one business day. If you need us sooner, call <a href="tel:+18183996318">(818) 399-6318</a> — we pick up.</p>
-      </form>
-
-      <!-- RIGHT: live estimate panel -->
-      <aside class="estimate-panel" aria-live="polite">
-        <div class="estimate-panel-inner">
-          <div class="eyebrow estimate-eyebrow">Estimated range</div>
-          <div class="estimate-amount" id="estimate-amount">$150 – $210</div>
-          <div class="estimate-unit" id="estimate-unit">per visit</div>
-
-          <div class="estimate-meta">
-            <div class="estimate-meta-item">
-              <span class="meta-label">Service</span>
-              <span class="meta-value" id="meta-service">Recurring maintenance</span>
-            </div>
-            <div class="estimate-meta-item">
-              <span class="meta-label">Property</span>
-              <span class="meta-value" id="meta-property">Single-family</span>
-            </div>
-            <div class="estimate-meta-item">
-              <span class="meta-label">Size</span>
-              <span class="meta-value" id="meta-size">500–2,000 sq ft</span>
-            </div>
-            <div class="estimate-meta-item" id="meta-frequency-wrap">
-              <span class="meta-label">Frequency</span>
-              <span class="meta-value" id="meta-frequency">Weekly</span>
-            </div>
-          </div>
-
-          <div class="estimate-rebate" id="estimate-rebate" hidden>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-            <div>
-              <strong>LADWP rebate may apply.</strong>
-              <p>We handle the paperwork — typical rebate is up to $3 per square foot of removed turf, applied to your final invoice.</p>
-            </div>
-          </div>
-
-          <p class="estimate-caveat">This is an estimate based on typical LA-market rates. We confirm the final price with a free on-site visit — no obligation, no pressure.</p>
-        </div>
-      </aside>
+      <div class="chat-input-area" id="chat-input-area"></div>
     </div>
+
+    <p class="chat-fallback">
+      Prefer to call or text directly? <a href="tel:+18183996318">(818) 399-6318</a> — we pick up.
+    </p>
   </div>
 </section>
 
 <script>
-  // ---------- Estimate generator: pricing model ----------
-  // CONFIGURE: tune these numbers to Antoni's actual price book. Current values are
-  // reasonable LA-market defaults from public landscaping pricing data — likely close
-  // but not exact. Edit SIZES, FREQ_MULT, PROPERTY_MULT, RANGE to calibrate.
+  // ========== Pricing model (unchanged from form version) ==========
+  // CONFIGURE: tune these numbers to Antoni's actual price book.
+  // See Pricing_Calibration_for_Dad.md for the scenarios driving each constant.
   const SIZES = {
     small:  { label: 'under 500 sq ft',    avgSqft:  350, maint: 120, cleanup:  280, install: [4.0, 8.0], drought: [8.0, 15.0], tree: 350 },
     medium: { label: '500–2,000 sq ft',    avgSqft: 1200, maint: 180, cleanup:  500, install: [4.5, 8.5], drought: [8.5, 15.5], tree: 500 },
     large:  { label: '2,000–5,000 sq ft',  avgSqft: 3500, maint: 260, cleanup:  850, install: [4.5, 9.0], drought: [9.0, 16.0], tree: 700 },
     xlarge: { label: '5,000+ sq ft',       avgSqft: 7500, maint: 380, cleanup: 1400, install: [5.0, 10.0], drought: [10.0, 18.0], tree: 1000 },
   };
-  const FREQ_MULT = { weekly: 1.0, biweekly: 1.08, monthly: 1.25 };          // less frequent = higher per-visit (route inefficiency)
-  const PROPERTY_MULT = { residential: 1.0, condo: 1.0, hoa: 1.20, commercial: 1.25 };  // commercial/HOA carries more overhead
-  const RANGE = 0.18;  // ±18% confidence band on the displayed range
+  const FREQ_MULT = { weekly: 1.0, biweekly: 1.08, monthly: 1.25 };
+  const PROPERTY_MULT = { residential: 1.0, condo: 1.0, hoa: 1.20, commercial: 1.25 };
+  const RANGE = 0.18;
 
   const SERVICE_LABEL = {
     maintenance: 'Recurring maintenance',
@@ -1515,93 +1646,252 @@
     other: 'Custom project',
   };
   const PROPERTY_LABEL = {
-    residential: 'Single-family',
+    residential: 'Single-family home',
     condo: 'Condo / townhouse',
     hoa: 'HOA common area',
-    commercial: 'Commercial',
+    commercial: 'Commercial / office',
   };
   const FREQ_LABEL = { weekly: 'Weekly', biweekly: 'Biweekly', monthly: 'Monthly' };
 
-  function fmtMoney(n) {
-    // Round to nearest $10 for clean display
-    return '$' + (Math.round(n / 10) * 10).toLocaleString();
-  }
+  const fmtMoney = n => '$' + (Math.round(n / 10) * 10).toLocaleString();
 
-  function computeEstimate() {
-    const service   = document.getElementById('est-service').value;
-    const property  = document.getElementById('est-property').value;
-    const size      = document.getElementById('est-size').value;
-    const frequency = document.getElementById('est-frequency').value;
-    const sizeData  = SIZES[size];
-    const propMult  = PROPERTY_MULT[property] || 1.0;
-
-    let mid = null, unit = '', rebate = false;
-
-    if (service === 'maintenance') {
-      mid  = sizeData.maint * propMult * (FREQ_MULT[frequency] || 1.0);
+  function computeEstimate(s) {
+    const sizeData = SIZES[s.size];
+    const propMult = PROPERTY_MULT[s.property] || 1.0;
+    let mid = null, unit = '';
+    if (s.service === 'maintenance') {
+      mid = sizeData.maint * propMult * (FREQ_MULT[s.frequency] || 1.0);
       unit = 'per visit';
-    } else if (service === 'cleanup') {
-      mid  = sizeData.cleanup * propMult;
-      unit = 'one-time';
-    } else if (service === 'install') {
+    } else if (s.service === 'cleanup') {
+      mid = sizeData.cleanup * propMult; unit = 'one-time';
+    } else if (s.service === 'install') {
       const [lo, hi] = sizeData.install;
-      mid  = ((lo + hi) / 2) * sizeData.avgSqft * propMult;
-      unit = 'project total';
-    } else if (service === 'drought') {
+      mid = ((lo + hi) / 2) * sizeData.avgSqft * propMult; unit = 'project total';
+    } else if (s.service === 'drought') {
       const [lo, hi] = sizeData.drought;
-      mid  = ((lo + hi) / 2) * sizeData.avgSqft * propMult;
-      unit = 'project total';
-      rebate = true;
-    } else if (service === 'tree') {
-      mid  = sizeData.tree * propMult;
-      unit = 'per tree';
+      mid = ((lo + hi) / 2) * sizeData.avgSqft * propMult; unit = 'project total';
+    } else if (s.service === 'tree') {
+      mid = sizeData.tree * propMult; unit = 'per tree';
     }
-    // 'other' returns null mid -> "Custom quote"
-
-    return { mid, unit, rebate, service, property, size, frequency };
+    if (mid === null) return { display: 'Custom quote', unit: '' };
+    const lo = mid * (1 - RANGE), hi = mid * (1 + RANGE);
+    return { display: fmtMoney(lo) + '–' + fmtMoney(hi), unit };
   }
 
-  function renderEstimate() {
-    const r = computeEstimate();
-    const amount    = document.getElementById('estimate-amount');
-    const unit      = document.getElementById('estimate-unit');
-    const rebate    = document.getElementById('estimate-rebate');
-    const hidden    = document.getElementById('estimate-hidden');
-    const freqRow   = document.getElementById('frequency-row');
-    const freqMeta  = document.getElementById('meta-frequency-wrap');
+  // ========== Chat UI primitives ==========
+  const chatBody  = document.getElementById('chat-body');
+  const inputArea = document.getElementById('chat-input-area');
 
-    if (r.mid === null) {
-      amount.textContent = 'Custom quote';
-      unit.textContent   = "we'll call to scope it";
-      hidden.value       = 'Custom — pending call';
-    } else {
-      const lo = r.mid * (1 - RANGE);
-      const hi = r.mid * (1 + RANGE);
-      amount.textContent = fmtMoney(lo) + ' – ' + fmtMoney(hi);
-      unit.textContent   = r.unit;
-      hidden.value       = fmtMoney(lo) + ' – ' + fmtMoney(hi) + ' (' + r.unit + ')';
-    }
-
-    // Meta strip
-    document.getElementById('meta-service').textContent  = SERVICE_LABEL[r.service]   || '—';
-    document.getElementById('meta-property').textContent = PROPERTY_LABEL[r.property] || '—';
-    document.getElementById('meta-size').textContent     = SIZES[r.size]?.label       || '—';
-    document.getElementById('meta-frequency').textContent = FREQ_LABEL[r.frequency]   || '—';
-
-    // Conditional reveals
-    rebate.hidden = !r.rebate;
-    const showFreq = (r.service === 'maintenance');
-    freqRow.style.display  = showFreq ? '' : 'none';
-    freqMeta.style.display = showFreq ? '' : 'none';
+  function appendBubble(text, side) {
+    const b = document.createElement('div');
+    b.className = 'chat-bubble ' + side;
+    // simple markdown-style bolding: **text**
+    b.innerHTML = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    chatBody.appendChild(b);
+    chatBody.scrollTop = chatBody.scrollHeight;
   }
+  function showTyping() {
+    const t = document.createElement('div');
+    t.className = 'chat-bubble bot typing'; t.id = 'typing-indicator';
+    t.innerHTML = '<span></span><span></span><span></span>';
+    chatBody.appendChild(t);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+  const hideTyping = () => document.getElementById('typing-indicator')?.remove();
 
-  document.addEventListener('DOMContentLoaded', () => {
-    ['est-service','est-property','est-size','est-frequency'].forEach(id => {
-      document.getElementById(id).addEventListener('change', renderEstimate);
+  function botSay(text, delay = 650) {
+    return new Promise(resolve => {
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        appendBubble(text, 'bot');
+        setTimeout(resolve, 180);
+      }, delay);
     });
-    renderEstimate();
-  });
+  }
+  const userSay = text => appendBubble(text, 'user');
+
+  function chips(options) {
+    return new Promise(resolve => {
+      inputArea.innerHTML = '';
+      const row = document.createElement('div');
+      row.className = 'chip-row';
+      options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.type = 'button'; btn.className = 'chip'; btn.textContent = opt.label;
+        btn.onclick = () => { userSay(opt.label); inputArea.innerHTML = ''; resolve(opt.value); };
+        row.appendChild(btn);
+      });
+      inputArea.appendChild(row);
+    });
+  }
+
+  function textInput(placeholder, type = 'text', validate = null) {
+    return new Promise(resolve => {
+      inputArea.innerHTML = '';
+      const form = document.createElement('form');
+      form.className = 'chat-form';
+      const input = document.createElement('input');
+      input.type = type; input.placeholder = placeholder; input.required = true;
+      const btn = document.createElement('button');
+      btn.type = 'submit'; btn.setAttribute('aria-label', 'Send');
+      btn.innerHTML = 'Send <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+      form.appendChild(input); form.appendChild(btn);
+      form.onsubmit = e => {
+        e.preventDefault();
+        const v = input.value.trim();
+        if (validate && !validate(v)) {
+          input.classList.add('chat-input-invalid');
+          input.focus();
+          return;
+        }
+        userSay(v); inputArea.innerHTML = ''; resolve(v);
+      };
+      inputArea.appendChild(form);
+      setTimeout(() => input.focus(), 100);
+    });
+  }
+
+  function fileOrSkip() {
+    return new Promise(resolve => {
+      inputArea.innerHTML = '';
+      const wrap = document.createElement('div');
+      const label = document.createElement('label');
+      label.className = 'chat-file-label';
+      const input = document.createElement('input');
+      input.type = 'file'; input.accept = 'image/*';
+      input.onchange = e => {
+        const file = e.target.files[0];
+        if (file) { userSay('📷 ' + file.name); inputArea.innerHTML = ''; resolve(file); }
+      };
+      label.appendChild(input);
+      label.appendChild(document.createTextNode('📷 Choose a photo'));
+      const skip = document.createElement('button');
+      skip.type = 'button'; skip.className = 'chat-file-skip'; skip.textContent = 'Skip';
+      skip.onclick = () => { userSay('(skipped photo)'); inputArea.innerHTML = ''; resolve(null); };
+      wrap.appendChild(label); wrap.appendChild(skip);
+      inputArea.appendChild(wrap);
+    });
+  }
+
+  function updateEstimatePill(text) {
+    const pill = document.getElementById('chat-estimate-pill');
+    document.getElementById('chat-estimate-value').textContent = text;
+    pill.hidden = false;
+  }
+
+  async function submitToFormspree(state) {
+    const fd = new FormData();
+    fd.append('_subject', "New Antoni's Landscaping estimate (chatbot)");
+    fd.append('name',  state.name  || '');
+    fd.append('phone', state.phone || '');
+    fd.append('email', state.email || '');
+    fd.append('zip',   state.zip   || '');
+    fd.append('service',  SERVICE_LABEL[state.service]  || state.service || '');
+    if (state.property)  fd.append('property',  PROPERTY_LABEL[state.property] || state.property);
+    if (state.size)      fd.append('size',      SIZES[state.size]?.label || state.size);
+    if (state.frequency) fd.append('frequency', FREQ_LABEL[state.frequency] || state.frequency);
+    fd.append('estimate', state.estimateDisplay || 'Custom — pending call');
+    if (state.photo) fd.append('photo', state.photo);
+    // CONFIGURE: replace YOUR_FORM_ID with real Formspree form ID from formspree.io
+    try {
+      await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST', body: fd, headers: { Accept: 'application/json' },
+      });
+    } catch (e) { console.warn('Form submit failed (network):', e); }
+  }
+
+  // ========== Conversation flow ==========
+  async function runFlow() {
+    const state = {};
+
+    await botSay("Hi! I'm with Antoni's Landscaping. I'll give you an instant price range in under a minute — no signup, no spam. What kind of work are you thinking about?", 400);
+
+    state.service = await chips([
+      { label: 'Recurring maintenance', value: 'maintenance' },
+      { label: 'One-time cleanup',      value: 'cleanup' },
+      { label: 'Design & install',      value: 'install' },
+      { label: 'Drought conversion',    value: 'drought' },
+      { label: 'Tree work',             value: 'tree' },
+      { label: 'Something else',        value: 'other' },
+    ]);
+
+    if (state.service === 'other') {
+      await botSay("No problem — happy to help. I'll grab a few quick details so we can call you back with a custom quote.");
+      state.estimateDisplay = 'Custom quote';
+      updateEstimatePill('Custom quote');
+    } else {
+      await botSay("Got it. What kind of property is it?");
+      state.property = await chips([
+        { label: 'Single-family home',    value: 'residential' },
+        { label: 'Condo / townhouse',     value: 'condo' },
+        { label: 'HOA common area',       value: 'hoa' },
+        { label: 'Commercial / office',   value: 'commercial' },
+      ]);
+
+      await botSay("Roughly how big is the area?");
+      state.size = await chips([
+        { label: 'Small — under 500 sq ft',       value: 'small' },
+        { label: 'Medium — 500–2,000 sq ft',      value: 'medium' },
+        { label: 'Large — 2,000–5,000 sq ft',     value: 'large' },
+        { label: 'Extra large — 5,000+ sq ft',    value: 'xlarge' },
+      ]);
+
+      if (state.service === 'maintenance') {
+        await botSay("How often would you want us to come?");
+        state.frequency = await chips([
+          { label: 'Weekly',   value: 'weekly' },
+          { label: 'Biweekly', value: 'biweekly' },
+          { label: 'Monthly',  value: 'monthly' },
+        ]);
+      }
+
+      const est = computeEstimate(state);
+      state.estimateDisplay = est.display + (est.unit ? ' (' + est.unit + ')' : '');
+      updateEstimatePill(est.display);
+
+      await botSay(`Based on that, your estimate is **${est.display}** ${est.unit}. We confirm the final number with a free on-site visit — no obligation.`);
+
+      if (state.service === 'drought') {
+        await botSay("💡 You may also qualify for a **LADWP rebate** of up to $3 per sq ft of removed turf — we handle the paperwork and apply it to your final invoice.");
+      }
+
+      await botSay("Want me to set up a free visit?");
+      const proceed = await chips([
+        { label: '✓ Yes, send my info to Antoni’s', value: 'yes' },
+        { label: 'Not yet',                              value: 'no' },
+      ]);
+
+      if (proceed === 'no') {
+        await botSay("No problem at all. Whenever you're ready, give us a call or text at **(818) 399-6318**. Have a great day!");
+        return;
+      }
+    }
+
+    await botSay("Great. What's your name?");
+    state.name = await textInput('Your name', 'text', v => v.length >= 2);
+
+    const firstName = state.name.split(/\s+/)[0];
+    await botSay(`Nice to meet you, ${firstName}. What's the best phone number to reach you at?`);
+    state.phone = await textInput('(555) 555-5555', 'tel', v => v.replace(/\D/g, '').length >= 10);
+
+    await botSay("And your email?");
+    state.email = await textInput('you@example.com', 'email', v => /\S+@\S+\.\S+/.test(v));
+
+    await botSay("Last one — what's the property's ZIP code?");
+    state.zip = await textInput('91345', 'text', v => /^\d{5}$/.test(v));
+
+    await botSay("Want to attach a photo of the space? Helps us get a feel for the project. Totally optional.");
+    state.photo = await fileOrSkip();
+
+    await botSay("Sending this to Antoni's now…", 300);
+    await submitToFormspree(state);
+    await botSay(`✓ All set, ${firstName}! Antoni's will call or text you within one business day. If you need us sooner, call **(818) 399-6318** — we pick up.`);
+  }
+
+  document.addEventListener('DOMContentLoaded', runFlow);
 </script>
+
 
 <!-- FINAL CTA -->
 <section class="final-cta">
