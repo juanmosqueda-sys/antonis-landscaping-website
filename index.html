@@ -9,10 +9,18 @@
 <meta name="theme-color" content="#093d77" />
 <link rel="icon" href="assets/logo.png" type="image/png" />
 <link rel="apple-touch-icon" href="assets/logo.png" />
+<meta name="robots" content="index, follow" />
+<!-- Canonical/OG point to the current live domain. When antonislandscaping.com
+     is repointed to this Vercel site, swap these (and the schema url/@id below)
+     to https://antonislandscaping.com/ -->
+<link rel="canonical" href="https://antonis-landscaping-website.vercel.app/" />
 <meta property="og:title" content="Antoni's Landscaping — A Los Angeles Landscaper Who Actually Shows Up." />
 <meta property="og:description" content="Family-owned, fully insured. Weekly maintenance, design &amp; install, drought conversions, LADWP rebate help. CSLB #768466. English &amp; Spanish." />
 <meta property="og:type" content="website" />
+<meta property="og:url" content="https://antonis-landscaping-website.vercel.app/" />
+<meta property="og:locale" content="en_US" />
 <meta property="og:image" content="https://img1.wsimg.com/isteam/ip/da22fe0a-b0dc-4871-bb27-3ecdaa4f4f06/DSC00425.jpg/:/rs=w:1600,h:900,m:cr" />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=League+Spartan:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -25,8 +33,8 @@
   "name": "Antoni's Landscaping",
   "legalName": "Antoni's Landscaping, Inc.",
   "image": "https://img1.wsimg.com/isteam/ip/da22fe0a-b0dc-4871-bb27-3ecdaa4f4f06/DSC00425.jpg/:/rs=w:1600,h:900,m:cr",
-  "@id": "https://antonislandscaping.com/",
-  "url": "https://antonislandscaping.com/",
+  "@id": "https://antonis-landscaping-website.vercel.app/",
+  "url": "https://antonis-landscaping-website.vercel.app/",
   "telephone": "+1-818-399-6318",
   "email": "antonislandscaping@yahoo.com",
   "priceRange": "$$",
@@ -71,6 +79,46 @@
     "name": "CSLB #768466",
     "recognizedBy": { "@type": "Organization", "name": "California Contractors State License Board" }
   }
+}
+</script>
+
+<!-- Schema.org FAQPage — mirrors the on-page FAQ so Google can show rich Q&A snippets -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does regular landscape maintenance cost?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Pricing depends on lot size, scope, and frequency, but most of our residential maintenance plans start around $120 per visit for bi-weekly service on a standard LA lot. We give a firm written quote after a free on-site visit so there are no surprises." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are you licensed and insured?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. We're a California-licensed contractor (CSLB #768466), fully insured, and carry workers' compensation for every member of our crew. We're happy to send proof of insurance before any job." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you help with the LADWP turf replacement rebate?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. We design the landscape, handle the install, and guide you through the LADWP application so you can claim the rebate. Ask us for a free rebate-eligibility check on your yard." }
+    },
+    {
+      "@type": "Question",
+      "name": "How fast can you come out?",
+      "acceptedAnswer": { "@type": "Answer", "text": "In most of LA County we can schedule a free estimate within 2–3 business days and start routine maintenance the week after. Installs and design projects are booked a few weeks out depending on scope." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you service commercial and HOA properties?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. We maintain multifamily, HOA common areas, retail plazas, and small office parks across LA County. We'll walk the property with your board or property manager and put together a tailored monthly proposal with fixed pricing." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are your crews bilingual?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. English and Spanish on every crew, so whether you want to chat with the foreman on site or get a written proposal, communication is never an issue." }
+    }
+  ]
 }
 </script>
 <style>
@@ -221,8 +269,8 @@
   .hero::after {
     content: ''; position: absolute; inset: 0; z-index: -1;
     background:
-      linear-gradient(180deg, rgba(20,38,10,0.6) 0%, rgba(20,38,10,0.45) 40%, rgba(20,38,10,0.85) 100%),
-      linear-gradient(95deg, rgba(20,38,10,0.5) 0%, rgba(20,38,10,0.1) 50%);
+      linear-gradient(180deg, rgba(23,37,84,0.62) 0%, rgba(23,37,84,0.45) 40%, rgba(23,37,84,0.88) 100%),
+      linear-gradient(95deg, rgba(23,37,84,0.55) 0%, rgba(23,37,84,0.1) 50%);
   }
   .hero-inner { max-width: 880px; }
   .hero h1 {
@@ -368,7 +416,7 @@
   }
   .service-img::after {
     content: ''; position: absolute; inset: 0;
-    background: linear-gradient(180deg, transparent 60%, rgba(20,38,10,0.4) 100%);
+    background: linear-gradient(180deg, transparent 60%, rgba(23,37,84,0.42) 100%);
   }
   .service-body { padding: 28px 30px 32px; }
   .service-body h3 { font-family: var(--serif); font-size: 1.55rem; font-weight: 600; }
@@ -391,77 +439,6 @@
   .svc-design   { background-image: url('https://img1.wsimg.com/isteam/ip/da22fe0a-b0dc-4871-bb27-3ecdaa4f4f06/DSC00049.jpg/:/rs=w:1200,h:900,m:cr'); }
   .svc-drought  { background-image: url('https://img1.wsimg.com/isteam/ip/da22fe0a-b0dc-4871-bb27-3ecdaa4f4f06/DSC00118.jpg/:/rs=w:1200,h:900,m:cr'); }
   .svc-commercial { background-image: url('https://img1.wsimg.com/isteam/ip/da22fe0a-b0dc-4871-bb27-3ecdaa4f4f06/DSC00122.jpg/:/rs=w:1200,h:900,m:cr'); }
-
-  /* ---------- Gallery ---------- */
-  .gallery {
-    background: var(--green-deep); color: var(--cream);
-    padding: 100px 0;
-  }
-  .gallery h2 { color: var(--cream); }
-  .gallery .section-head p { color: rgba(247,245,239,0.75); }
-  .gallery .eyebrow { color: var(--tan); }
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-  @media (min-width: 600px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 900px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
-  .ba-card {
-    position: relative;
-    aspect-ratio: 4 / 5;
-    border-radius: var(--radius);
-    overflow: hidden;
-    cursor: pointer;
-    background: rgba(247,245,239,0.06);
-    border: 1px solid rgba(247,245,239,0.12);
-  }
-  .ba-img {
-    position: absolute; inset: 0;
-    background-size: cover; background-position: center;
-  }
-  .ba-label {
-    position: absolute; bottom: 16px; left: 16px; right: 16px;
-    display: flex; justify-content: space-between; align-items: end;
-    z-index: 3;
-  }
-  .ba-tag {
-    background: rgba(20,38,10,0.85);
-    backdrop-filter: blur(6px);
-    color: var(--cream);
-    padding: 6px 12px; border-radius: 100px;
-    font-size: 0.78rem; font-weight: 500;
-    letter-spacing: 0.04em;
-  }
-  .ba-loc {
-    color: rgba(247,245,239,0.85);
-    font-size: 0.82rem;
-    font-style: italic;
-    font-family: var(--serif);
-  }
-  .ba-placeholder {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    color: rgba(247,245,239,0.5);
-    text-align: center; padding: 24px;
-    background: linear-gradient(135deg, rgba(90,122,62,0.3) 0%, rgba(20,38,10,0.5) 100%);
-    z-index: 2;
-  }
-  .ba-placeholder .icon { font-size: 2rem; margin-bottom: 12px; opacity: 0.7; }
-  .ba-placeholder span { font-size: 0.85rem; }
-  .gallery-cta {
-    text-align: center; margin-top: 50px;
-    color: rgba(247,245,239,0.85); font-size: 0.95rem;
-  }
-  .gallery-cta a { color: var(--tan); border-bottom: 1px solid var(--tan); padding-bottom: 1px; }
-
-  /* Gallery image placeholders — replace with real before/after pairs */
-  .ba-1 { background-image: url('https://images.unsplash.com/photo-1572731585148-5da7c9c7c4f4?auto=format&fit=crop&w=900&q=80'); }
-  .ba-2 { background-image: url('https://images.unsplash.com/photo-1597205260636-0bf08c5571dc?auto=format&fit=crop&w=900&q=80'); }
-  .ba-3 { background-image: url('https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=900&q=80'); }
-  .ba-4 { background-image: url('https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=900&q=80'); }
-  .ba-5 { background-image: url('https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?auto=format&fit=crop&w=900&q=80'); }
-  .ba-6 { background-image: url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=900&q=80'); }
 
   /* ---------- Process ---------- */
   .process-list {
@@ -488,34 +465,6 @@
   }
   .process-step h4 { font-family: var(--sans); font-size: 1.02rem; font-weight: 600; margin-bottom: 8px; color: var(--charcoal); }
   .process-step p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.55; }
-
-  /* ---------- LADWP Ribbon ---------- */
-  .ribbon {
-    background:
-      linear-gradient(135deg, rgba(20,38,10,0.92) 0%, rgba(45,80,22,0.85) 100%),
-      url('https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1800&q=80') center/cover;
-    color: var(--cream);
-    padding: 80px 0; text-align: center;
-  }
-  .ribbon .eyebrow { color: var(--tan); }
-  .ribbon h2 { color: var(--cream); max-width: 680px; margin: 0 auto 0.6em; }
-  .ribbon p { color: rgba(247,245,239,0.85); max-width: 580px; margin: 0 auto 32px; font-size: 1.05rem; line-height: 1.6; }
-  .ribbon .btn-primary { background: var(--tan); color: var(--green-deep); }
-  .ribbon .btn-primary:hover { background: var(--cream); }
-
-  /* ---------- Service area ---------- */
-  .area-tags {
-    display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
-    margin-top: 30px; max-width: 920px; margin-left: auto; margin-right: auto;
-  }
-  .area-tag {
-    background: #fff; border: 1px solid var(--border);
-    padding: 9px 16px; border-radius: 100px;
-    font-size: 0.88rem; color: var(--charcoal-soft);
-    transition: all 0.15s ease;
-  }
-  .area-tag:hover { background: var(--cream-warm); border-color: var(--sage); color: var(--green-dark); }
-  .area-tag.primary { background: var(--green); color: var(--cream); border-color: var(--green); font-weight: 500; }
 
   /* ---------- Testimonials ---------- */
   .testimonials-grid {
@@ -551,6 +500,9 @@
     display: flex; flex-direction: column; gap: 2px;
   }
   .testimonial cite strong { color: var(--charcoal); font-weight: 600; font-size: 0.95rem; }
+  .testimonial h3 { font-family: var(--brand); font-size: 1.3rem; font-weight: 700; color: var(--green-dark); margin-bottom: 12px; }
+  .reviews-cta { text-align: center; margin-top: 44px; color: var(--text-muted); font-size: 0.98rem; }
+  .reviews-cta a { color: var(--green); font-weight: 600; border-bottom: 1px solid var(--sage); padding-bottom: 1px; }
 
   /* ---------- Credentials strip ---------- */
   .credentials {
@@ -1020,7 +972,7 @@
   /* ---------- Final CTA ---------- */
   .final-cta {
     background:
-      linear-gradient(135deg, rgba(20,38,10,0.92) 0%, rgba(45,80,22,0.88) 100%),
+      linear-gradient(135deg, rgba(23,37,84,0.92) 0%, rgba(30,64,175,0.86) 100%),
       url('https://img1.wsimg.com/isteam/ip/da22fe0a-b0dc-4871-bb27-3ecdaa4f4f06/DSC00416.jpg/:/rs=w:2000,h:1125,m:cr') center/cover;
     color: var(--cream);
     text-align: center; padding: 110px 0;
@@ -1100,7 +1052,7 @@
   /* ---------- Drought / LADWP ribbon ---------- */
   .drought-ribbon {
     background:
-      linear-gradient(135deg, rgba(20,38,10,0.95) 0%, rgba(45,80,22,0.90) 100%),
+      linear-gradient(135deg, rgba(23,37,84,0.94) 0%, rgba(30,64,175,0.88) 100%),
       url('https://img1.wsimg.com/isteam/ip/da22fe0a-b0dc-4871-bb27-3ecdaa4f4f06/DSC00102.jpg/:/rs=w:2000,h:1125,m:cr') center/cover;
     color: var(--cream);
     padding: 100px 0;
@@ -1162,7 +1114,7 @@
     transition: background 0.15s ease, transform 0.15s ease;
     text-decoration: none;
   }
-  .btn-tan:hover { background: #e2d5b0; transform: translateY(-1px); }
+  .btn-tan:hover { background: #e2e8f0; transform: translateY(-1px); }
 
   /* ---------- Sticky mobile CTA (split: Call + Free Estimate) ---------- */
   .mobile-cta {
@@ -1502,31 +1454,33 @@
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
+<!-- WHAT WE STAND FOR (honest commitments — no fabricated reviews) -->
+<!-- When real Google reviews are live, swap this section back to quoted
+     testimonials using the .testimonial / .stars / blockquote / cite markup. -->
 <section id="testimonials" class="alt">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">What clients say</span>
-      <h2>Don't take our word for it.</h2>
+      <span class="eyebrow">Our promise to every client</span>
+      <h2>What you can count on, every visit.</h2>
+      <p>We're building our Google review profile right now — and these are the standards we hold ourselves to on every property, big or small.</p>
     </div>
-    <!-- TODO: replace placeholder testimonials with real customer quotes once GBP reviews are live -->
     <div class="testimonials-grid">
       <div class="testimonial">
-        <div class="stars">★★★★★</div>
-        <blockquote>I had tried three different landscaping crews before I found Antoni's. They show up on time every week, the yard has never looked better, and I actually get texts back. Totally different experience.</blockquote>
-        <cite><strong>Maria G.</strong>Sherman Oaks</cite>
+        <h3>We show up</h3>
+        <blockquote>On the day we say, in uniform and company trucks. If we're ever running behind, you hear from us first — not the other way around.</blockquote>
       </div>
       <div class="testimonial">
-        <div class="stars">★★★★★</div>
-        <blockquote>We did a full front-yard drought conversion with Antoni's. The design is gorgeous, my water bill dropped, and they walked me through the LADWP rebate paperwork. Couldn't recommend them more.</blockquote>
-        <cite><strong>David R.</strong>Pasadena</cite>
+        <h3>We communicate</h3>
+        <blockquote>Calls and texts get answered by a real person. Quotes come in writing. No chasing us down, no surprises on the invoice.</blockquote>
       </div>
       <div class="testimonial">
-        <div class="stars">★★★★★</div>
-        <blockquote>Our HOA finally has a landscaper we don't have to chase down. Clean, professional, and the communication is night-and-day better than our last vendor.</blockquote>
-        <cite><strong>Jenna W.</strong>HOA Board, Brentwood</cite>
+        <h3>We stand behind the work</h3>
+        <blockquote>We walk the property with you when the job's done. If something isn't right, we make it right — that's the whole point of a family name on the truck.</blockquote>
       </div>
     </div>
+    <p class="reviews-cta">
+      Recent customer? <a href="tel:+18183996318">Call us</a> and we'll send you our Google review link — we'd be grateful.
+    </p>
   </div>
 </section>
 
@@ -1780,7 +1734,48 @@
     pill.hidden = false;
   }
 
+  // ====================================================================
+  // ⚙️  CONFIGURE LEAD DELIVERY — do this before going live.
+  //   1. Create a free form at https://formspree.io (point it at
+  //      antonislandscaping@yahoo.com so leads land in the business inbox).
+  //   2. Copy the form's ID (the part after /f/ in its endpoint URL).
+  //   3. Paste it below, replacing YOUR_FORM_ID.
+  //   Until this is a real ID, the chatbot will NOT claim success — it
+  //   falls back to asking the customer to call/text, and offers a
+  //   pre-filled email so no lead is ever silently lost.
+  // ====================================================================
+  const FORMSPREE_ID = 'YOUR_FORM_ID';
+  const LEAD_EMAIL   = 'antonislandscaping@yahoo.com';
+
+  // Builds a mailto: fallback so a lead can still reach the business
+  // by email even if the automated submit fails or isn't configured yet.
+  function buildLeadMailto(state) {
+    const lines = [
+      'New estimate request from the website:',
+      '',
+      'Name: '      + (state.name  || ''),
+      'Phone: '     + (state.phone || ''),
+      'Email: '     + (state.email || ''),
+      'ZIP: '       + (state.zip   || ''),
+      'Service: '   + (SERVICE_LABEL[state.service] || state.service || ''),
+      'Property: '  + (PROPERTY_LABEL[state.property] || state.property || '—'),
+      'Size: '      + (SIZES[state.size]?.label || state.size || '—'),
+      'Frequency: ' + (FREQ_LABEL[state.frequency] || state.frequency || '—'),
+      'Estimate: '  + (state.estimateDisplay || 'Custom — pending call'),
+    ];
+    const subject = "Website estimate request" + (state.name ? ' — ' + state.name : '');
+    return 'mailto:' + LEAD_EMAIL +
+      '?subject=' + encodeURIComponent(subject) +
+      '&body='    + encodeURIComponent(lines.join('\n'));
+  }
+
+  // Returns true only if the lead was actually delivered.
   async function submitToFormspree(state) {
+    // Guard: if the form ID hasn't been configured yet, don't pretend it sent.
+    if (!FORMSPREE_ID || FORMSPREE_ID === 'YOUR_FORM_ID') {
+      console.warn('Formspree not configured — lead not delivered. Set FORMSPREE_ID.');
+      return false;
+    }
     const fd = new FormData();
     fd.append('_subject', "New Antoni's Landscaping estimate (chatbot)");
     fd.append('name',  state.name  || '');
@@ -1793,12 +1788,15 @@
     if (state.frequency) fd.append('frequency', FREQ_LABEL[state.frequency] || state.frequency);
     fd.append('estimate', state.estimateDisplay || 'Custom — pending call');
     if (state.photo) fd.append('photo', state.photo);
-    // CONFIGURE: replace YOUR_FORM_ID with real Formspree form ID from formspree.io
     try {
-      await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const res = await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
         method: 'POST', body: fd, headers: { Accept: 'application/json' },
       });
-    } catch (e) { console.warn('Form submit failed (network):', e); }
+      return res.ok; // false on 4xx/5xx so we can fall back honestly
+    } catch (e) {
+      console.warn('Form submit failed (network):', e);
+      return false;
+    }
   }
 
   // ========== Conversation flow ==========
@@ -1885,8 +1883,22 @@
     state.photo = await fileOrSkip();
 
     await botSay("Sending this to Antoni's now…", 300);
-    await submitToFormspree(state);
-    await botSay(`✓ All set, ${firstName}! Antoni's will call or text you within one business day. If you need us sooner, call **(818) 399-6318** — we pick up.`);
+    const delivered = await submitToFormspree(state);
+
+    if (delivered) {
+      await botSay(`✓ All set, ${firstName}! Antoni's will call or text you within one business day. If you need us sooner, call **(818) 399-6318** — we pick up.`);
+    } else {
+      // Honest fallback — never claim it sent if it didn't. Give the customer
+      // a one-tap way to reach the business so the lead isn't lost.
+      await botSay(`Thanks, ${firstName}! Our online form is having a hiccup, so the fastest way to lock in your free visit is a quick call or text to **(818) 399-6318** — we pick up.`);
+      const mailto = buildLeadMailto(state);
+      inputArea.innerHTML =
+        '<div class="chip-row">' +
+          '<a class="chip" href="tel:+18183996318">📞 Call now</a>' +
+          '<a class="chip" href="sms:+18183996318">💬 Text us</a>' +
+          '<a class="chip" href="' + mailto + '">✉️ Email my details</a>' +
+        '</div>';
+    }
   }
 
   document.addEventListener('DOMContentLoaded', runFlow);
