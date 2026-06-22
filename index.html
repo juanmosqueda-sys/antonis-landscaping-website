@@ -855,7 +855,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,.
   //   falls back to asking the customer to call/text, and offers a
   //   pre-filled email so no lead is ever silently lost.
   // ====================================================================
-  const FORMSPREE_ID = 'YOUR_FORM_ID';
+  const FORMSPREE_ID = 'xeebqzgg';
   const LEAD_EMAIL   = 'antonislandscaping@yahoo.com';
 
   // Builds a mailto: fallback so a lead can still reach the business
@@ -898,7 +898,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,.
     if (state.size)      fd.append('size',      SIZES[state.size]?.label || state.size);
     if (state.frequency) fd.append('frequency', FREQ_LABEL[state.frequency] || state.frequency);
     fd.append('estimate', state.estimateDisplay || 'Custom — pending call');
-    if (state.photo) fd.append('photo', state.photo);
+    // Formspree's free plan rejects file uploads, so we don't send the image
+    // itself — we flag that one was offered so the team can collect it on the call.
+    if (state.photo) fd.append('photo_offered', 'Yes — customer has a photo; collect it on the follow-up call.');
     try {
       const res = await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
         method: 'POST', body: fd, headers: { Accept: 'application/json' },
