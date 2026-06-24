@@ -166,7 +166,7 @@ h3{font-size:1.35rem;letter-spacing:-0.015em;font-weight:700;}
 .btn:hover .btn-arrow,.btn-arrow:hover::after{transform:translateX(3px);}
 .btn-primary{background:var(--blue);color:#fff;padding:16px 30px;}
 .btn-primary:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 14px 30px rgba(30,64,175,.30);}
-.btn-secondary{background:#fff;color:var(--navy);border:1.5px solid var(--g300);padding:16px 26px;}
+.btn-secondary{background:#fff;color:var(--navy);border:1.5px solid #6b7a90;padding:16px 26px;}
 .btn-secondary:hover{border-color:var(--navy);transform:translateY(-2px);}
 .btn-light{background:#fff;color:var(--navy);padding:16px 30px;}
 .btn-light:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(0,0,0,.28);}
@@ -204,11 +204,6 @@ h3{font-size:1.35rem;letter-spacing:-0.015em;font-weight:700;}
 .hero-proof .s{font-size:.76rem;text-transform:uppercase;letter-spacing:.07em;color:var(--g500);margin-top:4px;font-weight:600;}
 .hero-media{position:relative;}
 .hero-media .main{aspect-ratio:4/5;width:100%;object-fit:cover;border-radius:var(--radius);box-shadow:var(--shadow-lg);background:#dde3ec center/cover;}
-.hero-media .mini{position:absolute;top:-26px;right:-22px;width:40%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;border:5px solid #fff;box-shadow:0 18px 36px rgba(15,23,42,.22);background:#dde3ec center/cover;}
-.hero-card{position:absolute;left:-26px;bottom:-26px;background:#fff;border:1px solid var(--g200);border-radius:14px;padding:18px 22px;box-shadow:var(--shadow);display:flex;align-items:center;gap:15px;}
-.hero-card .big{font-family:var(--disp);font-weight:900;font-size:2.5rem;color:var(--blue);line-height:1;}
-.hero-card .tx{font-size:.85rem;color:var(--g600);font-weight:500;line-height:1.35;}
-.hero-card .tx b{color:var(--navy);font-weight:700;}
 
 /* ---------- stats band ---------- */
 .stats{background:var(--navy);color:#fff;padding:0;}
@@ -328,19 +323,20 @@ h3{font-size:1.35rem;letter-spacing:-0.015em;font-weight:700;}
 @keyframes blink{0%,80%,100%{opacity:.3;transform:translateY(0);}40%{opacity:1;transform:translateY(-3px);}}
 .chat-input-area{border-top:1px solid var(--g200);padding:16px 18px;min-height:68px;display:flex;align-items:center;}
 .chip-row{display:flex;flex-wrap:wrap;gap:8px;width:100%;}
-.chip{background:#fff;border:1.5px solid var(--g300);color:var(--navy);padding:10px 16px;border-radius:100px;font-family:var(--body);font-weight:600;font-size:.9rem;cursor:pointer;transition:all .15s ease;}
+.chip{background:#fff;border:1.5px solid #6b7a90;color:var(--navy);padding:10px 16px;border-radius:100px;font-family:var(--body);font-weight:600;font-size:.9rem;cursor:pointer;transition:all .15s ease;}
 .chip:hover{background:var(--blue);color:#fff;border-color:var(--blue);transform:translateY(-1px);}
-.chat-form{display:flex;gap:9px;width:100%;}
-.chat-form input{flex:1;padding:12px 15px;border:1.5px solid var(--g300);border-radius:10px;font-family:inherit;font-size:.96rem;background:#fff;}
+.chat-form{display:flex;flex-wrap:wrap;gap:9px;width:100%;}
+.chat-form input{flex:1;padding:12px 15px;border:1.5px solid #6b7a90;border-radius:10px;font-family:inherit;font-size:.96rem;background:#fff;}
 .chat-form input:focus{outline:none;border-color:var(--blue);}
 .chat-form input.chat-input-invalid{border-color:#dc2626;background:#fef2f2;}
+.chat-input-error{flex-basis:100%;margin-top:6px;color:#b91c1c;font-size:.82rem;font-weight:600;}
 .chat-form button{background:var(--blue);color:#fff;border:none;border-radius:10px;padding:0 18px;font-family:var(--body);font-weight:600;font-size:.92rem;cursor:pointer;display:flex;align-items:center;gap:7px;}
 .chat-form button:hover{background:var(--blue-dark);}
 .chat-form button svg{width:15px;height:15px;}
 /* File-upload step: the estimator script renders a plain <div> wrapping a
    .chat-file-label and a .chat-file-skip — the label text already includes the
    📷 emoji, so no ::before icon here (would double it). */
-.chat-file-label{display:inline-flex;align-items:center;gap:8px;background:var(--g50);border:1.5px dashed var(--g300);border-radius:10px;padding:11px 16px;font-weight:600;font-size:.9rem;color:var(--navy);cursor:pointer;}
+.chat-file-label{display:inline-flex;align-items:center;gap:8px;background:var(--g50);border:1.5px dashed #6b7a90;border-radius:10px;padding:11px 16px;font-weight:600;font-size:.9rem;color:var(--navy);cursor:pointer;}
 .chat-file-label input{display:none;}
 .chat-file-skip{background:none;border:none;color:var(--g500);font-family:inherit;font-weight:600;font-size:.9rem;cursor:pointer;padding:0 14px;}
 .chat-file-skip:hover{color:var(--navy);}
@@ -409,8 +405,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,.
   h2{font-size:1.8rem;}
   .stats-grid,.creds-grid,.proc-grid,.work-grid,.foot-grid{grid-template-columns:1fr;}
   .stats .it,.creds .it{border-right:none;}
-  .hero-media .mini{display:none;}
-  .hero-card{position:static;margin-top:18px;}
+  .hero-proof .it{padding-right:16px;margin-right:16px;}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}html{scroll-behavior:auto;}}
 </style>
@@ -456,8 +451,6 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,.
     </div>
     <div class="hero-media">
       <img class="main" src="https://img1.wsimg.com/isteam/ip/da22fe0a-b0dc-4871-bb27-3ecdaa4f4f06/DSC00049.jpg/:/rs=w:1100,h:1375,m:cr" alt="Custom landscape with pavers and planting installed by Antoni's Landscaping in Los Angeles" decoding="async" />
-      <img class="mini" src="https://img1.wsimg.com/isteam/ip/da22fe0a-b0dc-4871-bb27-3ecdaa4f4f06/DSC00044.jpg/:/rs=w:700,h:700,m:cr" alt="Manicured residential garden bed maintained by Antoni's crew" decoding="async" />
-      <div class="hero-card"><div class="big">70+</div><div class="tx"><b>Properties</b><br/>under care across<br/>LA County</div></div>
     </div>
   </div>
 </section>
@@ -810,13 +803,14 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,.
     });
   }
 
-  function textInput(placeholder, type = 'text', validate = null) {
+  function textInput(placeholder, type = 'text', validate = null, ariaLabel = null) {
     return new Promise(resolve => {
       inputArea.innerHTML = '';
       const form = document.createElement('form');
       form.className = 'chat-form';
       const input = document.createElement('input');
       input.type = type; input.placeholder = placeholder; input.required = true;
+      input.setAttribute('aria-label', ariaLabel || placeholder);
       const btn = document.createElement('button');
       btn.type = 'submit'; btn.setAttribute('aria-label', 'Send');
       btn.innerHTML = 'Send <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
@@ -824,8 +818,18 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,.
       form.onsubmit = e => {
         e.preventDefault();
         const v = input.value.trim();
+        input.classList.remove('chat-input-invalid');
+        input.removeAttribute('aria-invalid');
+        const prevErr = form.querySelector('.chat-input-error');
+        if (prevErr) prevErr.remove();
         if (validate && !validate(v)) {
           input.classList.add('chat-input-invalid');
+          input.setAttribute('aria-invalid', 'true');
+          const err = document.createElement('span');
+          err.className = 'chat-input-error';
+          err.setAttribute('role', 'alert');
+          err.textContent = 'Please enter a valid ' + (ariaLabel || placeholder).toLowerCase().replace(/^your /, '') + '.';
+          form.appendChild(err);
           input.focus();
           return;
         }
@@ -1003,13 +1007,13 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,.
 
     const firstName = state.name.split(/\s+/)[0];
     await botSay(`Nice to meet you, ${firstName}. What's the best phone number to reach you at?`);
-    state.phone = await textInput('(555) 555-5555', 'tel', v => v.replace(/\D/g, '').length >= 10);
+    state.phone = await textInput('(555) 555-5555', 'tel', v => v.replace(/\D/g, '').length >= 10, 'Your phone number');
 
     await botSay("And your email?");
-    state.email = await textInput('you@example.com', 'email', v => /\S+@\S+\.\S+/.test(v));
+    state.email = await textInput('you@example.com', 'email', v => /\S+@\S+\.\S+/.test(v), 'Your email address');
 
     await botSay("Last one — what's the property's ZIP code?");
-    state.zip = await textInput('91345', 'text', v => /^\d{5}$/.test(v));
+    state.zip = await textInput('91345', 'text', v => /^\d{5}$/.test(v), 'Your ZIP code');
 
     await botSay("Want to attach a photo of the space? Helps us get a feel for the project. Totally optional.");
     state.photo = await fileOrSkip();
