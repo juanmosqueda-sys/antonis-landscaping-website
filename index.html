@@ -91,7 +91,7 @@
     {
       "@type": "Question",
       "name": "How much does regular landscape maintenance cost?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Pricing depends on lot size, scope, and frequency, but most of our residential maintenance plans start around $120 per visit for bi-weekly service on a standard LA lot. We give a firm written quote after a free on-site visit so there are no surprises." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Our regular maintenance starts around $80 per visit and depends on yard size and frequency. We give a firm written quote after a free on-site visit so there are no surprises." }
     },
     {
       "@type": "Question",
@@ -372,7 +372,7 @@
       <h2>Frequently asked.</h2>
     </div>
     <div class="faq-list">
-      <details><summary>How much does regular landscape maintenance cost?</summary><div>Pricing depends on lot size, scope, and frequency, but most of our residential maintenance plans start around $120 per visit for bi-weekly service on a standard LA lot. We give a firm written quote after a free on-site visit so there are no surprises.</div></details>
+      <details><summary>How much does regular landscape maintenance cost?</summary><div>Our regular maintenance starts around $80 per visit and depends on yard size and frequency. We give a firm written quote after a free on-site visit so there are no surprises.</div></details>
       <details><summary>Are you licensed and insured?</summary><div>Yes. We're a California-licensed contractor (CSLB #768466), fully insured, and carry workers' compensation for every member of our crew. We're happy to send proof of insurance before any job.</div></details>
       <details><summary>Do you help with the LADWP turf replacement rebate?</summary><div>Yes. We design the landscape, handle the install, and guide you through the LADWP application so you can claim the rebate. Ask us for a free rebate-eligibility check on your yard.</div></details>
       <details><summary>How fast can you come out?</summary><div>In most of LA County we can schedule a free estimate within 2–3 business days and start routine maintenance the week after. Installs and design projects are booked a few weeks out depending on scope.</div></details>
@@ -414,18 +414,66 @@
 </section>
 
 <script>
-  // ========== Pricing model (unchanged from form version) ==========
-  // CONFIGURE: tune these numbers to Antoni's actual price book.
-  // See Pricing_Calibration_for_Dad.md for the scenarios driving each constant.
+  // ========== Pricing model — Antoni's confirmed price book ==========
+  // These are the owner's real numbers, not market estimates. Two rules hold
+  // across every branch: the customer always sees a RANGE, and the range always
+  // closes with the on-site-visit disclaimer. Property type is collected as
+  // lead info only — it deliberately never touches the price.
+
+  const MIN_TOTAL  = 80;   // floor on maintenance and small add-on totals
+  const CLEANUP_HR = 68;   // one-time cleanup crew labor, per hour
+  const CUSTOM_HR  = 65;   // custom / "something else" work, per worker-hour
+  const HAUL_LOAD  = 480;  // green-waste haul-away, per load
+
   const SIZES = {
-    small:  { label: 'under 500 sq ft',    avgSqft:  350, maint: 120, cleanup:  280, install: [4.0, 8.0], drought: [8.0, 15.0], tree: 350 },
-    medium: { label: '500–2,000 sq ft',    avgSqft: 1200, maint: 180, cleanup:  500, install: [4.5, 8.5], drought: [8.5, 15.5], tree: 500 },
-    large:  { label: '2,000–5,000 sq ft',  avgSqft: 3500, maint: 260, cleanup:  850, install: [4.5, 9.0], drought: [9.0, 16.0], tree: 700 },
-    xlarge: { label: '5,000+ sq ft',       avgSqft: 7500, maint: 380, cleanup: 1400, install: [5.0, 10.0], drought: [10.0, 18.0], tree: 1000 },
+    small:  { label: 'Small — under 500 sq ft',    maintWeekly: [ 80,  80], cleanupHours: [ 2,  4] },
+    medium: { label: 'Medium — 500–2,000 sq ft',   maintWeekly: [ 80, 180], cleanupHours: [ 4,  8] },
+    large:  { label: 'Large — 2,000–5,000 sq ft',  maintWeekly: [180, 240], cleanupHours: [ 8, 16] },
+    xlarge: { label: 'Extra large — 5,000+ sq ft', maintWeekly: [240, 320], cleanupHours: [16, 28] },
   };
-  const FREQ_MULT = { weekly: 1.0, biweekly: 1.08, monthly: 1.25 };
-  const PROPERTY_MULT = { residential: 1.0, condo: 1.0, hoa: 1.20, commercial: 1.25 };
-  const RANGE = 0.18;
+
+  const FREQ_MULT  = { weekly: 1.0, biweekly: 1.5, monthly: 3.0 };
+  const FREQ_LABEL = { weekly: 'Weekly', biweekly: 'Biweekly', monthly: 'Monthly' };
+
+  // Design & install — priced per unit by project type. `rate` is [low, high];
+  // equal endpoints mean the rate is fixed and only the scope varies.
+  const INSTALL = {
+    sod:        { label: 'New sod',               rate: [6.00, 6.00],   unit: 'sq ft',         ask: 'About how many square feet of sod?',           ph: 'e.g. 800' },
+    bed:        { label: 'New plant bed',         rate: [7.50, 7.50],   unit: 'sq ft',         ask: 'About how many square feet of planting bed?',  ph: 'e.g. 300' },
+    irrigation: { label: 'Irrigation system',     rate: [2458, 2458],   unit: 'zones',         ask: 'How many zones?',                              ph: 'e.g. 4' },
+    drip:       { label: 'Drip conversion',       rate: [2106, 2106],   unit: 'zones',         ask: 'How many zones are you converting?',           ph: 'e.g. 3' },
+    paver:      { label: 'Paver patio / walkway', rate: [12, 18],       unit: 'sq ft',         ask: 'About how many square feet of paving?',        ph: 'e.g. 400' },
+    wall:       { label: 'Retaining wall',        rate: [85, 115],      unit: 'sq ft of face', ask: 'About how many square feet of wall face?',     ph: 'e.g. 120' },
+    lighting:   { label: 'Outdoor lighting',      rate: [78, 228],      unit: 'fixtures',      ask: 'How many fixtures?',                           ph: 'e.g. 8' },
+    drain:      { label: 'French drain',          rate: [35, 40],       unit: 'linear ft',     ask: 'About how many linear feet?',                  ph: 'e.g. 60' },
+    controller: { label: 'Smart controller',      rate: [350, 350],     unit: 'controllers',   ask: 'How many controllers?',                        ph: 'e.g. 1' },
+    sprinkler:  { label: 'Sprinkler repair',      quote: "Sprinkler repair runs **about $95/hour**, priced on the visit." },
+  };
+
+  const DROUGHT = {
+    removal: { label: 'Turf removal only',                          rate: 2.75 },
+    full:    { label: 'Full conversion — removal + natives + drip', rate: 12.00 },
+  };
+
+  const TREE_SIZE_LABEL = { small: 'Small — under 15 ft', medium: 'Medium — 15–30 ft', large: 'Large — 30+ ft' };
+  const TREE = {
+    trim:    { label: 'Trimming',       bySize: { small: [185, 350], medium: [350, 950], large: [950, 3500] } },
+    removal: { label: 'Removal',        bySize: { small: [650, 650], medium: [1850, 1850], large: null } },
+    stump:   { label: 'Stump grinding', flat: [450, 2200] },
+  };
+
+  // Add-ons — per-unit where a quantity makes sense, flat or hourly otherwise.
+  const ADDONS = {
+    palm:     { label: 'Palm trimming',             rate: [1200, 1200],   unit: 'palms',   ask: 'How many palms?',                      ph: 'e.g. 2' },
+    color:    { label: 'Seasonal color',            rate: [55, 55],       unit: 'flats',   ask: 'How many flats of flowers?',           ph: 'e.g. 6' },
+    mulch:    { label: 'Mulch / bark',              rate: [27.50, 27.50], unit: 'bags',    ask: 'How many bags?',                       ph: 'e.g. 10' },
+    fert:     { label: 'Fertilization',             flat: [125, 125],     unit: 'per application' },
+    weed:     { label: 'Weed control',              rate: [0.75, 0.75],   unit: 'sq ft',   ask: 'About how many square feet?',          ph: 'e.g. 1200' },
+    aeration: { label: 'Lawn aeration',             rate: [0.004, 0.004], unit: 'sq ft',   ask: 'About how many square feet of lawn?',  ph: 'e.g. 2000' },
+    patch:    { label: 'Sod / lawn patch',          rate: [10, 10],       unit: 'sq ft',   ask: 'About how many square feet to patch?', ph: 'e.g. 150' },
+    mow:      { label: 'Mowing / edging / blowing', quote: "Mowing, edging and blowing runs **$40/hour**, priced on site." },
+    hedge:    { label: 'Hedge / shrub trimming',    quote: "Hedge and shrub trimming runs **$68/hour**, priced on site." },
+  };
 
   const SERVICE_LABEL = {
     maintenance: 'Recurring maintenance',
@@ -433,6 +481,7 @@
     install: 'Design & install',
     drought: 'Drought conversion',
     tree: 'Tree work',
+    addon: 'Add-on service',
     other: 'Custom project',
   };
   const PROPERTY_LABEL = {
@@ -441,31 +490,82 @@
     hoa: 'HOA common area',
     commercial: 'Commercial / office',
   };
-  const FREQ_LABEL = { weekly: 'Weekly', biweekly: 'Biweekly', monthly: 'Monthly' };
 
-  const fmtMoney = n => '$' + (Math.round(n / 10) * 10).toLocaleString();
+  const BALLPARK = "This is a ballpark — we confirm the exact price with a free on-site visit.";
 
+  const fmtMoney = n => '$' + Math.round(n).toLocaleString('en-US');
+  // Collapses to a single figure when both ends round the same, so a fixed
+  // price reads "$650" rather than "$650–$650".
+  const fmtRange = (lo, hi) =>
+    Math.round(lo) === Math.round(hi) ? fmtMoney(lo) : fmtMoney(lo) + '–' + fmtMoney(hi);
+
+  // Returns { display, unit, note } when we can put a number on it, or
+  // { quote } when the job can only be priced on site.
   function computeEstimate(s) {
-    const sizeData = SIZES[s.size];
-    const propMult = PROPERTY_MULT[s.property] || 1.0;
-    let mid = null, unit = '';
+    const qty = parseFloat(s.qty) || 0;
+
     if (s.service === 'maintenance') {
-      mid = sizeData.maint * propMult * (FREQ_MULT[s.frequency] || 1.0);
-      unit = 'per visit';
-    } else if (s.service === 'cleanup') {
-      mid = sizeData.cleanup * propMult; unit = 'one-time';
-    } else if (s.service === 'install') {
-      const [lo, hi] = sizeData.install;
-      mid = ((lo + hi) / 2) * sizeData.avgSqft * propMult; unit = 'project total';
-    } else if (s.service === 'drought') {
-      const [lo, hi] = sizeData.drought;
-      mid = ((lo + hi) / 2) * sizeData.avgSqft * propMult; unit = 'project total';
-    } else if (s.service === 'tree') {
-      mid = sizeData.tree * propMult; unit = 'per tree';
+      const [lo, hi] = SIZES[s.size].maintWeekly;
+      const mult = FREQ_MULT[s.frequency] || 1.0;
+      return {
+        display: fmtRange(Math.max(MIN_TOTAL, lo * mult), Math.max(MIN_TOTAL, hi * mult)),
+        unit: 'per visit',
+      };
     }
-    if (mid === null) return { display: 'Custom quote', unit: '' };
-    const lo = mid * (1 - RANGE), hi = mid * (1 + RANGE);
-    return { display: fmtMoney(lo) + '–' + fmtMoney(hi), unit };
+
+    if (s.service === 'cleanup') {
+      const [hLo, hHi] = SIZES[s.size].cleanupHours;
+      return {
+        display: fmtRange(hLo * CLEANUP_HR, hHi * CLEANUP_HR),
+        unit: 'one-time labor',
+        note: "That's roughly " + hLo + "–" + hHi + " hours of crew time at $" + CLEANUP_HR + "/hour, plus about $" + HAUL_LOAD + " per load for green-waste haul-away.",
+      };
+    }
+
+    if (s.service === 'install') {
+      const p = INSTALL[s.projectType];
+      if (p.quote) return { quote: p.quote };
+      return {
+        display: fmtRange(qty * p.rate[0], qty * p.rate[1]),
+        unit: 'project total (materials + labor vary — confirmed on site)',
+      };
+    }
+
+    if (s.service === 'drought') {
+      const d = DROUGHT[s.droughtMode];
+      return {
+        display: fmtRange(qty * d.rate, qty * d.rate),
+        unit: 'project total',
+        note: "We handle the LADWP rebate paperwork at no charge — it can pay you back per sq ft removed.",
+      };
+    }
+
+    if (s.service === 'tree') {
+      const job  = TREE[s.treeJob];
+      const band = job.flat || (job.bySize && job.bySize[s.treeSize]);
+      if (!band) return { quote: "A tree that size is priced on site — we look at reach, drop zone and access before we can put a number on it." };
+      return {
+        display: fmtRange(band[0], band[1]),
+        unit: job === TREE.stump ? 'per stump' : 'per tree',
+        note: "Final price depends on the tree — confirmed on site.",
+      };
+    }
+
+    if (s.service === 'addon') {
+      const a = ADDONS[s.addon];
+      if (a.quote) return { quote: a.quote };
+      if (a.flat)  return { display: fmtRange(Math.max(MIN_TOTAL, a.flat[0]), Math.max(MIN_TOTAL, a.flat[1])), unit: a.unit };
+      return {
+        display: fmtRange(Math.max(MIN_TOTAL, qty * a.rate[0]), Math.max(MIN_TOTAL, qty * a.rate[1])),
+        unit: 'total',
+      };
+    }
+
+    if (s.service === 'other') {
+      return { quote: "Custom work runs **about $" + CUSTOM_HR + "/worker-hour**; we'll confirm with a free on-site visit." };
+    }
+
+    return { quote: "We'll price this one on site." };
   }
 
   // ========== Chat UI primitives ==========
@@ -594,6 +694,25 @@
   const FORMSPREE_ID = 'xeebqzgg';
   const LEAD_EMAIL   = 'antonislandscaping@yahoo.com';
 
+  // Human-readable summary of the branch-specific answers, so a lead reads
+  // "Project: Drip conversion / Quantity: 3 zones" rather than just
+  // "Design & install". Only the keys the chosen branch actually set appear.
+  function leadDetails(s) {
+    const rows = [];
+    if (s.size)        rows.push(['Size',      SIZES[s.size].label]);
+    if (s.frequency)   rows.push(['Frequency', FREQ_LABEL[s.frequency]]);
+    if (s.projectType) rows.push(['Project',   INSTALL[s.projectType].label]);
+    if (s.droughtMode) rows.push(['Scope',     DROUGHT[s.droughtMode].label]);
+    if (s.treeJob)     rows.push(['Tree job',  TREE[s.treeJob].label]);
+    if (s.treeSize)    rows.push(['Tree size', TREE_SIZE_LABEL[s.treeSize]]);
+    if (s.addon)       rows.push(['Add-on',    ADDONS[s.addon].label]);
+    if (s.qty) {
+      const unit = (INSTALL[s.projectType] || ADDONS[s.addon] || {}).unit || 'sq ft';
+      rows.push(['Quantity', s.qty + ' ' + unit]);
+    }
+    return rows;
+  }
+
   // Builds a mailto: fallback so a lead can still reach the business
   // by email even if the automated submit fails or isn't configured yet.
   function buildLeadMailto(state) {
@@ -606,10 +725,8 @@
       'ZIP: '       + (state.zip   || ''),
       'Service: '   + (SERVICE_LABEL[state.service] || state.service || ''),
       'Property: '  + (PROPERTY_LABEL[state.property] || state.property || '—'),
-      'Size: '      + (SIZES[state.size]?.label || state.size || '—'),
-      'Frequency: ' + (FREQ_LABEL[state.frequency] || state.frequency || '—'),
       'Estimate: '  + (state.estimateDisplay || 'Custom — pending call'),
-    ];
+    ].concat(leadDetails(state).map(([k, v]) => k + ': ' + v));
     const subject = "Website estimate request" + (state.name ? ' — ' + state.name : '');
     return 'mailto:' + LEAD_EMAIL +
       '?subject=' + encodeURIComponent(subject) +
@@ -631,8 +748,7 @@
     fd.append('zip',   state.zip   || '');
     fd.append('service',  SERVICE_LABEL[state.service]  || state.service || '');
     if (state.property)  fd.append('property',  PROPERTY_LABEL[state.property] || state.property);
-    if (state.size)      fd.append('size',      SIZES[state.size]?.label || state.size);
-    if (state.frequency) fd.append('frequency', FREQ_LABEL[state.frequency] || state.frequency);
+    leadDetails(state).forEach(([k, v]) => fd.append(k.toLowerCase().replace(/ /g, '_'), v));
     fd.append('estimate', state.estimateDisplay || 'Custom — pending call');
     // Formspree's free plan rejects file uploads, so we don't send the image
     // itself — we flag that one was offered so the team can collect it on the call.
@@ -649,6 +765,15 @@
   }
 
   // ========== Conversation flow ==========
+  // Turns a price-book table into chips, so the menu and the math can never
+  // drift apart.
+  const menuChips = table => Object.keys(table).map(k => ({ label: table[k].label, value: k }));
+
+  // Asks "how many / how much", echoing the unit so the answer is unambiguous.
+  function askQty(spec) {
+    return textInput(spec.ph, 'number', v => parseFloat(v) > 0, 'Amount in ' + spec.unit);
+  }
+
   async function runFlow() {
     const state = {};
 
@@ -660,49 +785,76 @@
       { label: 'Design & install',      value: 'install' },
       { label: 'Drought conversion',    value: 'drought' },
       { label: 'Tree work',             value: 'tree' },
+      { label: 'Add-on service',        value: 'addon' },
       { label: 'Something else',        value: 'other' },
     ]);
 
-    if (state.service === 'other') {
-      await botSay("No problem — happy to help. I'll grab a few quick details so we can call you back with a custom quote.");
-      state.estimateDisplay = 'Custom quote';
-      updateEstimatePill('Custom quote');
-    } else {
-      await botSay("Got it. What kind of property is it?");
-      state.property = await chips([
-        { label: 'Single-family home',    value: 'residential' },
-        { label: 'Condo / townhouse',     value: 'condo' },
-        { label: 'HOA common area',       value: 'hoa' },
-        { label: 'Commercial / office',   value: 'commercial' },
+    if (state.service === 'maintenance') {
+      await botSay("Got it. Roughly how big is the yard?");
+      state.size = await chips(menuChips(SIZES));
+      await botSay("And how often would you want us out?");
+      state.frequency = await chips([
+        { label: 'Weekly',   value: 'weekly' },
+        { label: 'Biweekly', value: 'biweekly' },
+        { label: 'Monthly',  value: 'monthly' },
       ]);
 
-      await botSay("Roughly how big is the area?");
-      state.size = await chips([
-        { label: 'Small — under 500 sq ft',       value: 'small' },
-        { label: 'Medium — 500–2,000 sq ft',      value: 'medium' },
-        { label: 'Large — 2,000–5,000 sq ft',     value: 'large' },
-        { label: 'Extra large — 5,000+ sq ft',    value: 'xlarge' },
-      ]);
+    } else if (state.service === 'cleanup') {
+      await botSay("Got it. Roughly how big is the area that needs cleaning up?");
+      state.size = await chips(menuChips(SIZES));
 
-      if (state.service === 'maintenance') {
-        await botSay("How often would you want us to come?");
-        state.frequency = await chips([
-          { label: 'Weekly',   value: 'weekly' },
-          { label: 'Biweekly', value: 'biweekly' },
-          { label: 'Monthly',  value: 'monthly' },
-        ]);
+    } else if (state.service === 'install') {
+      await botSay("Nice — what are we building?");
+      state.projectType = await chips(menuChips(INSTALL));
+      const project = INSTALL[state.projectType];
+      if (!project.quote) {
+        await botSay(project.ask);
+        state.qty = await askQty(project);
       }
 
-      const est = computeEstimate(state);
+    } else if (state.service === 'drought') {
+      await botSay("Great call — about how many square feet of lawn are we looking at?");
+      state.qty = await textInput('e.g. 500', 'number', v => parseFloat(v) > 0, 'Lawn area in sq ft');
+      await botSay("Do you just want the turf taken out, or the full conversion?");
+      state.droughtMode = await chips(menuChips(DROUGHT));
+
+    } else if (state.service === 'tree') {
+      await botSay("Got it. What does the tree need?");
+      state.treeJob = await chips(menuChips(TREE));
+      if (TREE[state.treeJob].bySize) {
+        await botSay("About how tall is it?");
+        state.treeSize = await chips(
+          Object.keys(TREE_SIZE_LABEL).map(k => ({ label: TREE_SIZE_LABEL[k], value: k }))
+        );
+      }
+
+    } else if (state.service === 'addon') {
+      await botSay("Sure — which one?");
+      state.addon = await chips(menuChips(ADDONS));
+      const addon = ADDONS[state.addon];
+      if (!addon.quote && !addon.flat) {
+        await botSay(addon.ask);
+        state.qty = await askQty(addon);
+      }
+    }
+
+    // ----- Present the number (or say honestly that it needs a site visit) -----
+    const est = computeEstimate(state);
+
+    if (est.display) {
       state.estimateDisplay = est.display + (est.unit ? ' (' + est.unit + ')' : '');
       updateEstimatePill(est.display);
+      await botSay("Based on that, your estimate is **" + est.display + "** " + est.unit + ".");
+    } else {
+      state.estimateDisplay = 'Custom — priced on site';
+      updateEstimatePill('On-site quote');
+      await botSay(est.quote);
+    }
+    if (est.note) await botSay(est.note);
+    // "Something else" already ends on the free-visit promise, so don't say it twice.
+    if (state.service !== 'other') await botSay(BALLPARK);
 
-      await botSay(`Based on that, your estimate is **${est.display}** ${est.unit}. We confirm the final number with a free on-site visit — no obligation.`);
-
-      if (state.service === 'drought') {
-        await botSay("💡 You may also qualify for a **LADWP rebate** of up to $3 per sq ft of removed turf — we handle the paperwork and apply it to your final invoice.");
-      }
-
+    if (state.service !== 'other') {
       await botSay("Want me to set up a free visit?");
       const proceed = await chips([
         { label: '✓ Yes, send my info to Antoni’s', value: 'yes' },
@@ -715,7 +867,17 @@
       }
     }
 
-    await botSay("Great. What's your name?");
+    // ----- Lead capture. Property type lives here: it's context for the crew,
+    // not a price input. -----
+    await botSay("Great. What kind of property is it?");
+    state.property = await chips([
+      { label: 'Single-family home',  value: 'residential' },
+      { label: 'Condo / townhouse',   value: 'condo' },
+      { label: 'HOA common area',     value: 'hoa' },
+      { label: 'Commercial / office', value: 'commercial' },
+    ]);
+
+    await botSay("And what's your name?");
     state.name = await textInput('Your name', 'text', v => v.length >= 2);
 
     const firstName = state.name.split(/\s+/)[0];
