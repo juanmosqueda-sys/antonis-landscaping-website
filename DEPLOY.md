@@ -1,48 +1,95 @@
 # Antoni's Landscaping — Website Deployment
 
-## Files in this folder
+## What's in this repo
 
-- `index.html` — the full one-page site (mobile-first, single file, embedded CSS, no build step)
-- `vercel.json` — security headers + clean URLs for Vercel
+- `index.html` — the home page (single file, embedded JS, no build step)
+- `commercial/index.html` — the commercial & HOA landing page
+- `assets/site.css` — shared stylesheet for both pages
+- `assets/photos/` — all site photography, self-hosted
+- `assets/logo.png`, `assets/logo-white.png` — brand marks
+- `vercel.json` — clean URLs + security headers
 
-## Fastest path to a live URL (~60 seconds)
+There is no build step. Edit the HTML or CSS, commit, push — that's the whole
+workflow.
 
-1. Go to **vercel.com/new**
-2. Click **Deploy** → **Other** (skip the Git template flow)
-3. **Drag this `website` folder** onto the upload area
-4. Vercel will auto-detect it as a static site and assign a `*.vercel.app` URL
-5. Done. Paste the URL anywhere — GBP profile, job postings, footer.
+## How deploys work
 
-## Alternative: give me a Vercel token
+The repo is connected to Vercel. **Every push to `main` deploys to production
+automatically.** Every pull request gets its own preview URL, posted as a
+comment on the PR by the Vercel bot.
 
-If you'd rather I deploy it from here:
+So: open a PR, check the preview, merge. The merge is the deploy.
 
-1. Go to **vercel.com/account/tokens**
-2. Create a token (any name, no expiry needed for a one-shot deploy — you can revoke after)
-3. Paste it back to me in chat — I'll run the CLI and report the URL
+## Going live on antonislandscaping.com
 
-## Before going live — one-time configuration
+The site currently answers on its `*.vercel.app` address. To launch it on the
+real domain:
 
-**Form backend (Formspree, 2 min, free):**
-1. Sign up at **formspree.io** with `antonislandscaping@yahoo.com`
-2. Create a new form, name it "Antoni's quote requests"
-3. Copy the form ID (looks like `mzbqkxgr`)
-4. Open `index.html`, search for `YOUR_FORM_ID`, replace with the real ID
-5. Save & redeploy
+### 1. Add the domain in Vercel
 
-Without this step, the quote form will show "success" to visitors but won't actually deliver submissions.
+1. Open the project at **vercel.com** → **Settings** → **Domains**
+2. Add `antonislandscaping.com`, then add `www.antonislandscaping.com`
+3. Choose which one is canonical — apex (`antonislandscaping.com`) is the
+   usual pick. Vercel will redirect the other one to it.
+4. Vercel now shows the exact DNS records to create. Keep this tab open.
 
-**Photos:** All photos now reference real Antoni's job shots pulled from the existing `antonislandscaping.com` site (hosted on GoDaddy's `wsimg.com` CDN). **Caveat:** if the old GoDaddy site is ever shut down, these URLs will break. To future-proof, download each `DSC00XXX.jpg` into `assets/photos/` and update the URLs to relative paths. Affected files (search `wsimg.com` in `index.html`): hero, og:image, schema, 4 service cards, drought ribbon, final CTA, 6 portfolio tiles. Available photos: DSC00042, 00044, 00049, 00102, 00118, 00122, 00416, 00423, 00425.
+### 2. Point DNS at Vercel (at GoDaddy)
 
-**Testimonials:** The three customer quotes are placeholders from the canonical website copy. Replace with real quotes once GBP reviews start rolling in. Search for `<!-- TODO: replace placeholder testimonials` in `index.html`.
+Two ways. **Prefer the first** unless you have a reason not to.
 
-## After it's live
+**Option A — change records only (safer, leaves email alone):**
 
-- Add the URL to the **Website** field in your Google Business Profile draft
-- Put the URL in the footer of the Indeed / Craigslist / Facebook job posts
-- Drop it into the Antonis Marketing Strategy doc as the canonical web home
-- Submit the URL to **Google Search Console** (`search.google.com/search-console`) to speed up indexing
+1. GoDaddy → **My Products** → the domain → **DNS** → **Manage Zones**
+2. Edit the `A` record for host `@` to the IP address Vercel showed you
+3. Edit (or add) a `CNAME` for host `www` pointing to `cname.vercel-dns.com`
+4. Leave every `MX` and `TXT` record exactly as-is — those carry email and
+   domain verification
 
-## To edit later
+**Option B — move nameservers to Vercel (simpler, moves *all* DNS):**
 
-It's one HTML file. Open `index.html` in any editor, change copy, redeploy by dragging the folder back to vercel.com (or `vercel --prod` from the CLI).
+Only do this if nothing else runs on the domain. It moves email routing too,
+so if any address `@antonislandscaping.com` receives mail, Option A is the
+safe choice.
+
+### 3. Wait, then verify
+
+DNS usually propagates in minutes, occasionally a few hours. Vercel issues the
+HTTPS certificate on its own once the records resolve — no action needed.
+
+Before moving on, load `https://antonislandscaping.com` in a browser and
+confirm the new site appears with a valid padlock.
+
+### 4. Merge the URL swap
+
+The `canonical`, `og:url`, `og:image` and JSON-LD `url` / `@id` / `image`
+fields are absolute URLs and must name the live domain. There are 13 of them
+across the two pages.
+
+**Merge that change only after step 3 passes** — pointing canonical tags at a
+domain that doesn't resolve yet tells Google the real site is a dead address.
+
+### 5. Tell Google
+
+- **Search Console** (`search.google.com/search-console`) — add the domain as
+  a property, verify it, submit the home page
+- **Google Business Profile** — put `https://antonislandscaping.com` in the
+  Website field
+- Update the URL anywhere it's already posted: job listings, social profiles,
+  the marketing strategy doc
+
+## Before launch — check these
+
+**The quote form.** It posts to Formspree (form ID is in `index.html`, search
+`FORMSPREE_ID`). Run one real submission end to end and confirm the email
+lands in the inbox. The form reports success based on Formspree's response, so
+a misconfigured account loses leads silently rather than visibly.
+
+**The commercial page placeholder.** `commercial/index.html` has a card marked
+`<!-- PLACEHOLDER -->` where a board or property-manager testimonial should
+go. It currently holds neutral copy about the track record, which is true and
+safe to ship. Swap in a real quote when one exists — do not invent one.
+
+## Editing later
+
+Change the file, open a PR, look at the preview URL the Vercel bot posts, then
+merge. Production updates within a minute or so of the merge.
